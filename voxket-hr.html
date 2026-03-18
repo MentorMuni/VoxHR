@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voxket HR AI Suite — The First Voice-First AI Workforce for HR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --bg:#05070F; --bg2:#080B18; --bg3:#0D1120;
+  --indigo:#4F46E5; --blue:#3B82F6; --cyan:#06B6D4;
+  --text:#E6EAF2; --muted:#7E8BA0;
+  --border:rgba(79,70,229,.16);
+  --f:'Plus Jakarta Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--f);font-size:16px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");opacity:.45}
+a{text-decoration:none;color:inherit} button{cursor:pointer;font-family:var(--f)}
+
+/* ── TYPOGRAPHY ── */
+.d1{font-size:clamp(2.25rem,3.8vw,3.75rem);font-weight:800;line-height:1.1;letter-spacing:-.04em}
+.h2{font-size:clamp(1.875rem,3vw,2.875rem);font-weight:800;line-height:1.1;letter-spacing:-.035em}
+.h3{font-size:1.0625rem;font-weight:700;letter-spacing:-.02em;line-height:1.3}
+.body{font-size:1rem;font-weight:400;line-height:1.72}
+.sm{font-size:.875rem;font-weight:400;line-height:1.6}
+.xs{font-size:.8125rem;line-height:1.55}
+.mono{font-family:var(--mono);font-size:.75rem}
+.muted{color:var(--muted)}
+.grad{background:linear-gradient(135deg,var(--indigo) 0%,var(--blue) 50%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1220px;margin:0 auto;padding:0 5vw}
+.wrap-sm{max-width:880px;margin:0 auto;padding:0 5vw}
+section{padding:6rem 0;position:relative;overflow:hidden}
+.grid-bg{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(79,70,229,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(79,70,229,.04) 1px,transparent 1px);background-size:58px 58px}
+.sec-label{display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:.875rem}
+.sec-label::before{content:'';width:16px;height:1px;background:var(--cyan);flex-shrink:0}
+
+/* ── COMPONENTS ── */
+.card{background:rgba(13,17,32,.78);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(8px);transition:all .3s}
+.card:hover{border-color:rgba(79,70,229,.36);transform:translateY(-4px);box-shadow:0 22px 44px rgba(0,0,0,.32),0 0 26px rgba(79,70,229,.07)}
+.btn{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--f);font-weight:600;transition:all .2s;border:none}
+.btn-sm{font-size:.8125rem;padding:.44rem 1.1rem;border-radius:8px}
+.btn-md{font-size:.9375rem;padding:.75rem 1.6rem;border-radius:10px}
+.btn-lg{font-size:1rem;padding:.9rem 2rem;border-radius:12px}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--indigo);background:rgba(79,70,229,.08)}
+.btn-solid{background:linear-gradient(135deg,var(--indigo),var(--blue));color:#fff;box-shadow:0 0 22px rgba(79,70,229,.4)}
+.btn-solid:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(79,70,229,.65)}
+.btn-glow{background:linear-gradient(135deg,var(--indigo),var(--blue),var(--cyan));color:#fff;box-shadow:0 0 28px rgba(79,70,229,.5)}
+.btn-glow:hover{transform:translateY(-2px) scale(1.015);box-shadow:0 0 48px rgba(79,70,229,.72)}
+
+/* ── ANIMATIONS ── */
+@keyframes dot-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+@keyframes wave-bar{0%,100%{transform:scaleY(1);opacity:.7}50%{transform:scaleY(2.1);opacity:1}}
+@keyframes dash-flow{from{stroke-dashoffset:24}to{stroke-dashoffset:0}}
+@keyframes orb-drift{0%,100%{transform:translate(0,0)}33%{transform:translate(18px,-18px)}66%{transform:translate(-14px,12px)}}
+@keyframes central-glow{0%,100%{box-shadow:0 0 40px rgba(79,70,229,.5),0 0 80px rgba(79,70,229,.2)}50%{box-shadow:0 0 60px rgba(79,70,229,.7),0 0 120px rgba(79,70,229,.3)}}
+@keyframes fab-glow{0%,100%{box-shadow:0 0 20px rgba(79,70,229,.55)}50%{box-shadow:0 0 36px rgba(79,70,229,.82)}}
+@keyframes slide-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+@keyframes eq-bar{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.reveal.up{opacity:1;transform:translateY(0)}
+
+/* ─────────── PROGRESS BAR ─────────── */
+#prog{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--indigo),var(--cyan));z-index:10000;box-shadow:0 0 8px var(--cyan)}
+
+/* ─────────── NAV ─────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(5,7,15,.88);backdrop-filter:blur(24px) saturate(1.5);border-bottom:1px solid rgba(79,70,229,.18)}
+.nav-logo{font-weight:800;font-size:1.1rem;letter-spacing:-.025em;background:linear-gradient(135deg,var(--indigo),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:1.875rem}
+.nav-links a{color:#C4CCDA;font-size:.875rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-acts{display:flex;gap:.7rem}
+
+/* ─────────── HERO ─────────── */
+#hero{min-height:100vh;display:flex;align-items:center;padding-top:64px;background:radial-gradient(ellipse 90% 65% at 50% -5%,rgba(79,70,229,.2) 0%,transparent 68%)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(79,70,229,.11);border:1px solid rgba(79,70,229,.26);border-radius:100px;padding:.3rem .95rem .3rem .72rem;font-family:var(--mono);font-size:.68rem;color:#a5b4fc;margin-bottom:1.25rem;margin-top:1.5rem}
+.ldot{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation:dot-pulse 1.8s infinite}
+.hero-h1{margin-bottom:1rem}
+.hero-sub{color:var(--muted);font-size:1rem;line-height:1.72;max-width:488px;margin-bottom:2rem}
+.hero-btns{display:flex;gap:.875rem;flex-wrap:wrap;margin-bottom:2rem}
+.hero-stats{display:flex;gap:2.25rem;padding-top:.875rem;border-top:1px solid rgba(79,70,229,.1)}
+.stat-v{font-weight:800;font-size:1.625rem;letter-spacing:-.04em;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-l{font-size:.73rem;color:var(--muted);margin-top:.1rem}
+
+/* hero sim */
+.sim{background:rgba(10,13,26,.92);border:1px solid rgba(79,70,229,.22);border-radius:20px;padding:1.5rem;box-shadow:0 0 60px rgba(79,70,229,.12),inset 0 1px 0 rgba(255,255,255,.04)}
+.sim-bar{display:flex;align-items:center;justify-content:space-between;padding-bottom:.875rem;border-bottom:1px solid rgba(79,70,229,.1);margin-bottom:1.125rem}
+.sim-tag{font-family:var(--mono);font-size:.67rem;color:var(--muted)}
+.sim-live{display:flex;align-items:center;gap:.38rem;font-family:var(--mono);font-size:.67rem;color:#34d399}
+.sim-caller{display:flex;align-items:center;gap:.875rem;background:rgba(79,70,229,.08);border:1px solid rgba(79,70,229,.14);border-radius:12px;padding:.875rem 1rem;margin-bottom:1.125rem}
+.sim-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--indigo),var(--cyan));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.875rem;flex-shrink:0}
+.call-name{font-weight:700;font-size:.875rem;letter-spacing:-.015em}
+.call-role{font-size:.7rem;color:var(--muted);margin-top:.1rem}
+.wav{display:flex;align-items:center;gap:3px;margin-left:auto}
+.wb{width:3px;border-radius:2px;background:linear-gradient(180deg,var(--cyan),var(--indigo));animation:wave-bar 1.1s ease-in-out infinite}
+.wb:nth-child(1){height:10px}.wb:nth-child(2){height:18px;animation-delay:.1s}.wb:nth-child(3){height:26px;animation-delay:.2s}.wb:nth-child(4){height:20px;animation-delay:.15s}.wb:nth-child(5){height:22px;animation-delay:.25s}.wb:nth-child(6){height:14px;animation-delay:.05s}.wb:nth-child(7){height:19px;animation-delay:.3s}
+.tx-box{min-height:126px;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.125rem}
+.tx{font-size:.8rem;line-height:1.55;padding:.48rem .72rem;border-radius:8px;animation:slide-up .3s ease both}
+.tx-ai{background:rgba(79,70,229,.1);border-left:2px solid var(--indigo);color:#c7d2fe}
+.tx-c{background:rgba(6,182,212,.07);border-left:2px solid var(--cyan);color:#a5f3fc;margin-left:1rem}
+.chips{display:flex;gap:.45rem;flex-wrap:wrap}
+.chip{padding:.26rem .7rem;border-radius:100px;font-family:var(--mono);font-size:.66rem;font-weight:500;transition:all .4s}
+.chip-q{background:rgba(52,211,153,.1);color:#34d399;border:1px solid rgba(52,211,153,.22)}
+.chip-s{background:rgba(79,70,229,.12);color:#a5b4fc;border:1px solid rgba(79,70,229,.28)}
+.chip-o{background:rgba(6,182,212,.1);color:#67e8f9;border:1px solid rgba(6,182,212,.22)}
+.chip-on{box-shadow:0 0 9px currentColor}
+
+/* ─────────── REFRAME ─────────── */
+#reframe{background:var(--bg2);border-top:1px solid rgba(79,70,229,.07);border-bottom:1px solid rgba(79,70,229,.07)}
+.rf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.375rem;margin-top:3rem}
+.rf-card{padding:1.875rem;position:relative;overflow:hidden}
+.rf-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(79,70,229,.06),transparent 60%);opacity:0;transition:opacity .3s}
+.rf-card:hover::before{opacity:1}
+.rf-x{font-family:var(--mono);font-size:.67rem;color:var(--muted);text-decoration:line-through;margin-bottom:.35rem}
+.rf-arr{color:var(--indigo);font-size:1rem;margin-bottom:.38rem}
+.rf-t{font-weight:700;font-size:1.0625rem;letter-spacing:-.02em;margin-bottom:.55rem}
+.rf-b{font-size:.8rem;color:var(--muted);line-height:1.65}
+
+/* ─────────── PROBLEM ─────────── */
+#problem{background:radial-gradient(ellipse 65% 50% at 50% 50%,rgba(239,68,68,.05) 0%,transparent 70%)}
+.prob-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-top:2.75rem}
+.prob-card{background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.14);border-radius:14px;padding:1.5rem 1.75rem;display:flex;align-items:flex-start;gap:.875rem;transition:all .3s}
+.prob-card:hover{border-color:rgba(239,68,68,.3);box-shadow:0 0 20px rgba(239,68,68,.07);animation:shake .28s ease}
+.prob-ico{width:42px;height:42px;border-radius:10px;flex-shrink:0;background:rgba(239,68,68,.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.prob-t{font-weight:700;font-size:.9375rem;letter-spacing:-.015em;margin-bottom:.28rem}
+.prob-b{font-size:.8rem;color:var(--muted);line-height:1.62}
+
+/* ─────────── AGENTS ─────────── */
+#agents{background:var(--bg2)}
+.net{position:relative;height:500px;margin-top:4rem}
+.cn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:126px;height:126px;border-radius:50%;background:linear-gradient(135deg,var(--indigo),var(--blue));display:flex;flex-direction:column;align-items:center;justify-content:center;animation:central-glow 3s ease-in-out infinite;z-index:10}
+.cn-ico{font-size:1.875rem;margin-bottom:.2rem}
+.cn-lbl{font-weight:800;font-size:.6rem;letter-spacing:.06em;text-align:center;line-height:1.3}
+.an{position:absolute;width:106px;height:106px;border-radius:50%;background:rgba(10,13,26,.94);border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.18rem;transition:all .3s;box-shadow:0 0 18px rgba(79,70,229,.08)}
+.an:hover{border-color:var(--indigo);transform:scale(1.1);box-shadow:0 0 28px rgba(79,70,229,.28)}
+.an-ico{font-size:1.4rem}
+.an-lbl{font-weight:700;font-size:.6rem;text-align:center;line-height:1.3;letter-spacing:.01em}
+.an-sub{font-size:.57rem;color:var(--muted);text-align:center}
+.n-top{top:4%;left:50%;transform:translateX(-50%)}
+.n-right{top:38%;right:4%}
+.n-bot{bottom:4%;left:50%;transform:translateX(-50%)}
+.n-left{top:38%;left:4%}
+.net-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.cline{stroke:url(#g1);stroke-width:1.5;fill:none;stroke-dasharray:6 4;animation:dash-flow 2s linear infinite}
+.mwav{display:flex;align-items:center;gap:2px;margin-top:1px}
+.mb{width:2px;background:var(--cyan);border-radius:1px;animation:wave-bar 1.1s ease-in-out infinite}
+.mb:nth-child(1){height:4px}.mb:nth-child(2){height:8px;animation-delay:.1s}.mb:nth-child(3){height:11px;animation-delay:.2s}.mb:nth-child(4){height:7px;animation-delay:.15s}.mb:nth-child(5){height:5px;animation-delay:.05s}
+
+/* ─────────── AUDIO DEMO ─────────── */
+#audio{background:var(--bg3);border-top:1px solid rgba(79,70,229,.07);border-bottom:1px solid rgba(79,70,229,.07)}
+.audio-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.audio-feats{display:flex;flex-direction:column;gap:.875rem;margin-top:1.75rem}
+.af{display:flex;align-items:center;gap:.875rem;background:rgba(79,70,229,.07);border:1px solid var(--border);border-radius:12px;padding:.875rem 1.125rem;font-size:.875rem;font-weight:500;transition:all .25s}
+.af:hover{border-color:rgba(79,70,229,.34);background:rgba(79,70,229,.12)}
+.af-ico{font-size:1.05rem;flex-shrink:0}
+/* player card */
+.player{background:rgba(10,13,26,.96);border:1px solid rgba(79,70,229,.22);border-radius:20px;padding:2rem;box-shadow:0 0 56px rgba(79,70,229,.1),inset 0 1px 0 rgba(255,255,255,.04)}
+.pl-title{font-weight:700;font-size:1rem;letter-spacing:-.02em;margin-bottom:.2rem}
+.pl-meta{font-family:var(--mono);font-size:.67rem;color:var(--muted);margin-bottom:1.375rem}
+.eq{display:flex;align-items:flex-end;gap:3px;height:30px;margin-bottom:1.375rem}
+.eq-b{width:4px;border-radius:2px;background:linear-gradient(180deg,var(--cyan),var(--indigo))}
+.eq-b:nth-child(1){height:55%}.eq-b:nth-child(2){height:82%}.eq-b:nth-child(3){height:60%}.eq-b:nth-child(4){height:95%}.eq-b:nth-child(5){height:48%}.eq-b:nth-child(6){height:78%}.eq-b:nth-child(7){height:62%}.eq-b:nth-child(8){height:90%}.eq-b:nth-child(9){height:68%}.eq-b:nth-child(10){height:44%}.eq-b:nth-child(11){height:74%}.eq-b:nth-child(12){height:52%}
+.eq.on .eq-b{animation:eq-bar .6s ease-in-out infinite}
+.eq.on .eq-b:nth-child(2){animation-delay:.05s}.eq.on .eq-b:nth-child(3){animation-delay:.1s}.eq.on .eq-b:nth-child(4){animation-delay:.15s}.eq.on .eq-b:nth-child(5){animation-delay:.08s}.eq.on .eq-b:nth-child(6){animation-delay:.2s}.eq.on .eq-b:nth-child(7){animation-delay:.12s}.eq.on .eq-b:nth-child(8){animation-delay:.18s}.eq.on .eq-b:nth-child(9){animation-delay:.06s}.eq.on .eq-b:nth-child(10){animation-delay:.14s}.eq.on .eq-b:nth-child(11){animation-delay:.22s}.eq.on .eq-b:nth-child(12){animation-delay:.09s}
+.wf-wrap{position:relative;height:46px;background:rgba(79,70,229,.06);border-radius:8px;overflow:hidden;cursor:pointer;margin-bottom:1rem}
+.wf-bars{display:flex;align-items:center;gap:2px;height:100%;padding:4px 8px}
+.wf-b{flex:1;border-radius:2px;background:rgba(79,70,229,.28);min-height:4px;transition:background .2s}
+.wf-b.done{background:linear-gradient(180deg,var(--cyan),var(--indigo))}
+.wf-overlay{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,rgba(79,70,229,.16),transparent);pointer-events:none;transition:width .1s}
+.pl-time{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.67rem;color:var(--muted);margin-bottom:1.25rem}
+.pl-ctrls{display:flex;align-items:center;gap:1rem;justify-content:center;margin-bottom:1.5rem}
+.pl-play{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--indigo),var(--blue));border:none;color:#fff;font-size:1.05rem;box-shadow:0 0 20px rgba(79,70,229,.45);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.pl-play:hover{transform:scale(1.08);box-shadow:0 0 32px rgba(79,70,229,.68)}
+.pl-skip{background:rgba(79,70,229,.1);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:.42rem .78rem;font-family:var(--mono);font-size:.73rem;transition:all .2s}
+.pl-skip:hover{border-color:var(--indigo);background:rgba(79,70,229,.18)}
+.tx-scroll{max-height:148px;overflow-y:auto;display:flex;flex-direction:column;gap:.45rem;padding-top:1.25rem;border-top:1px solid rgba(79,70,229,.1)}
+.tx-scroll::-webkit-scrollbar{width:3px}
+.tx-scroll::-webkit-scrollbar-thumb{background:rgba(79,70,229,.4);border-radius:2px}
+.txa{font-size:.775rem;line-height:1.5;padding:.38rem .6rem;border-radius:6px}
+.txa.ai{background:rgba(79,70,229,.1);border-left:2px solid var(--indigo);color:#c7d2fe}
+.txa.c{background:rgba(6,182,212,.07);border-left:2px solid var(--cyan);color:#a5f3fc;margin-left:.75rem}
+
+/* ─────────── TIMELINE ─────────── */
+#workflow{}
+.tl{position:relative;margin-top:3.75rem;padding-left:1.75rem}
+.tl::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--indigo),var(--cyan))}
+.tl-step{position:relative;margin-bottom:2rem;padding-left:2.125rem;opacity:0;transform:translateX(-16px);transition:all .5s ease}
+.tl-step.up{opacity:1;transform:translateX(0)}
+.tl-dot{position:absolute;left:-2rem;top:.25rem;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--indigo),var(--cyan));box-shadow:0 0 10px var(--indigo)}
+.tl-card{background:rgba(10,13,26,.86);border:1px solid var(--border);border-radius:13px;padding:1.125rem 1.375rem;display:flex;gap:1rem;align-items:flex-start;transition:all .25s}
+.tl-card:hover{border-color:rgba(79,70,229,.36);transform:translateX(5px)}
+.tl-n{font-family:var(--mono);font-size:.67rem;color:var(--cyan);flex-shrink:0;padding-top:.1rem}
+.tl-t{font-weight:700;font-size:.9375rem;letter-spacing:-.015em;margin-bottom:.25rem}
+.tl-b{font-size:.8rem;color:var(--muted);line-height:1.6}
+.tl-badge{margin-left:auto;padding:.18rem .58rem;border-radius:100px;flex-shrink:0;font-family:var(--mono);font-size:.63rem;background:rgba(52,211,153,.09);color:#34d399;border:1px solid rgba(52,211,153,.18)}
+
+/* ─────────── DASHBOARD ─────────── */
+#dash{background:var(--bg2)}
+.dash{margin-top:2.75rem;background:rgba(5,7,18,.98);border:1px solid rgba(79,70,229,.2);border-radius:18px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.55),0 0 56px rgba(79,70,229,.07)}
+.dash-top{background:rgba(10,13,26,.95);padding:.875rem 1.5rem;border-bottom:1px solid rgba(79,70,229,.09);display:flex;align-items:center;gap:.45rem}
+.osx{width:11px;height:11px;border-radius:50%}
+.dash-title{margin:0 auto;font-family:var(--mono);font-size:.67rem;color:var(--muted)}
+.dash-body{display:grid;grid-template-columns:216px 1fr;min-height:375px}
+.dash-sb{padding:1.125rem .875rem;border-right:1px solid rgba(79,70,229,.07);display:flex;flex-direction:column;gap:.28rem}
+.sb-lbl{font-family:var(--mono);font-size:.58rem;color:var(--muted);padding:.45rem .72rem .25rem;letter-spacing:.1em;text-transform:uppercase}
+.dn{padding:.52rem .72rem;border-radius:7px;font-size:.8rem;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:.52rem;transition:all .2s;font-weight:500}
+.dn:hover{background:rgba(79,70,229,.1);color:var(--text)}
+.dn.act{background:rgba(79,70,229,.14);color:var(--text);border-left:2px solid var(--indigo);border-radius:0 7px 7px 0;padding-left:calc(.72rem - 2px)}
+.dash-main{padding:1.25rem}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.25rem}
+.kpi{background:rgba(13,17,32,.72);border:1px solid rgba(79,70,229,.1);border-radius:11px;padding:.875rem;cursor:default;transition:all .25s}
+.kpi:hover{border-color:rgba(79,70,229,.3);transform:translateY(-2px)}
+.kpi-l{font-size:.67rem;color:var(--muted);margin-bottom:.32rem;font-weight:500}
+.kpi-v{font-weight:800;font-size:1.5rem;letter-spacing:-.04em;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.kpi-d{font-size:.66rem;color:#34d399;margin-top:.18rem}
+.pipe-lbl{font-size:.68rem;font-weight:600;color:var(--muted);margin-bottom:.72rem;letter-spacing:.04em;text-transform:uppercase;font-family:var(--mono)}
+.prow{display:grid;grid-template-columns:1.2fr 1fr 96px 70px;gap:.45rem;align-items:center;padding:.62rem .875rem;border-radius:8px;font-size:.775rem;margin-bottom:.32rem;background:rgba(10,13,26,.62);border:1px solid rgba(79,70,229,.05);transition:all .2s;cursor:default}
+.prow:hover{background:rgba(79,70,229,.06);border-color:rgba(79,70,229,.18)}
+.prow-n{font-weight:600}
+.prow-s{color:var(--muted);font-size:.71rem}
+.pb{background:rgba(79,70,229,.1);border-radius:100px;height:4px}
+.pbf{height:4px;border-radius:100px;background:linear-gradient(90deg,var(--indigo),var(--cyan));box-shadow:0 0 5px var(--cyan)}
+.ok{padding:.14rem .48rem;border-radius:100px;font-family:var(--mono);font-size:.62rem;background:rgba(52,211,153,.09);color:#6ee7b7;border:1px solid rgba(52,211,153,.18)}
+.warn{padding:.14rem .48rem;border-radius:100px;font-family:var(--mono);font-size:.62rem;background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.18)}
+
+/* ─────────── COMPARE ─────────── */
+#compare{}
+.cmp{margin-top:2.75rem;border-radius:16px;overflow:hidden;border:1px solid rgba(79,70,229,.18)}
+.cmp-h{display:grid;grid-template-columns:1fr 1fr 1fr;background:rgba(10,13,26,.9);border-bottom:1px solid rgba(79,70,229,.1)}
+.cmp-th{padding:.875rem 1.25rem;font-weight:700;font-size:.875rem;letter-spacing:-.015em}
+.cmp-th.v{background:linear-gradient(135deg,rgba(79,70,229,.18),rgba(6,182,212,.08));border-left:1px solid rgba(79,70,229,.22);border-right:1px solid rgba(79,70,229,.22);text-align:center;color:#a5b4fc}
+.cmp-r{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid rgba(79,70,229,.05);transition:background .2s}
+.cmp-r:last-child{border-bottom:none}
+.cmp-r:hover{background:rgba(79,70,229,.03)}
+.cmp-td{padding:.875rem 1.25rem;font-size:.84rem;color:var(--muted);display:flex;align-items:center}
+.cmp-td.feat{color:var(--text);font-weight:500}
+.cmp-td.v{background:linear-gradient(135deg,rgba(79,70,229,.07),rgba(6,182,212,.03));border-left:1px solid rgba(79,70,229,.1);border-right:1px solid rgba(79,70,229,.1);justify-content:center}
+.yes{color:#34d399;font-size:1.1rem}
+.no{color:#ef4444;font-size:1.1rem}
+
+/* ─────────── METRICS ─────────── */
+#metrics{background:var(--bg2)}
+.met-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.75rem}
+.met-card{padding:2.5rem 2rem;text-align:center;transition:all .3s}
+.met-card:hover{border-color:rgba(79,70,229,.4);transform:translateY(-6px);box-shadow:0 28px 48px rgba(0,0,0,.35),0 0 34px rgba(79,70,229,.1)}
+.met-n{font-weight:800;font-size:clamp(2.875rem,5vw,4.25rem);letter-spacing:-.05em;background:linear-gradient(135deg,var(--indigo),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.05;margin-bottom:.45rem}
+.met-l{font-weight:700;font-size:.9375rem;letter-spacing:-.015em;margin-bottom:.28rem}
+.met-s{font-size:.8rem;color:var(--muted)}
+
+/* ─────────── USERS ─────────── */
+#users{}
+.usr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.25rem}
+.usr-card{padding:2rem;position:relative;overflow:hidden}
+.usr-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--indigo),var(--cyan));transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.usr-card:hover::after{transform:scaleX(1)}
+.usr-ico{font-size:2rem;margin-bottom:.875rem}
+.usr-t{font-weight:700;font-size:1.0625rem;letter-spacing:-.02em;margin-bottom:.22rem}
+.usr-tag{color:var(--cyan);font-size:.8rem;font-weight:600;margin-bottom:.7rem}
+.usr-b{font-size:.8rem;color:var(--muted);line-height:1.65}
+
+/* ─────────── INTEGRATIONS ─────────── */
+#ints{background:var(--bg2)}
+.int-wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:1.125rem;margin-top:3.25rem}
+.int-c{background:rgba(10,13,26,.86);border:1px solid var(--border);border-radius:13px;padding:1.125rem 1.625rem;display:flex;align-items:center;gap:.875rem;min-width:166px;transition:all .28s}
+.int-c:hover{border-color:rgba(79,70,229,.36);transform:translateY(-4px) scale(1.015);box-shadow:0 18px 28px rgba(0,0,0,.3),0 0 18px rgba(79,70,229,.1)}
+.int-ico{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+.int-n{font-weight:600;font-size:.875rem;letter-spacing:-.01em}
+.int-s{font-size:.7rem;color:var(--muted);margin-top:.08rem}
+.flow{margin-top:1.875rem;text-align:center;font-size:.8rem;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:.5rem}
+.fdots{display:inline-flex;gap:.3rem}
+.fd{width:5px;height:5px;border-radius:50%;background:var(--indigo);animation:dot-pulse 1.5s ease-in-out infinite}
+.fd:nth-child(2){animation-delay:.2s}.fd:nth-child(3){animation-delay:.4s}
+
+/* ─────────── TRUST ─────────── */
+#trust{}
+.tr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3.25rem}
+.tr-card{padding:1.625rem;text-align:center;transition:all .28s}
+.tr-card:hover{border-color:rgba(79,70,229,.35);transform:translateY(-4px)}
+.tr-ico{font-size:1.875rem;margin-bottom:.7rem;display:block}
+.tr-t{font-weight:700;font-size:.9375rem;letter-spacing:-.015em;margin-bottom:.3rem}
+.tr-b{font-size:.775rem;color:var(--muted);line-height:1.55}
+
+/* ─────────── CTA ─────────── */
+#cta{background:var(--bg2);text-align:center}
+.orb{position:absolute;border-radius:50%;animation:orb-drift 8s ease-in-out infinite;pointer-events:none}
+.o1{width:560px;height:560px;left:-20%;top:-55%;background:radial-gradient(circle,rgba(79,70,229,.14) 0%,transparent 68%)}
+.o2{width:460px;height:460px;right:-16%;bottom:-45%;background:radial-gradient(circle,rgba(6,182,212,.1) 0%,transparent 68%);animation-delay:-4s}
+.cta-in{position:relative;z-index:1;max-width:660px;margin:0 auto}
+.cta-sub{color:var(--muted);font-size:1.0625rem;line-height:1.75;margin-bottom:2.375rem;margin-top:1rem}
+.cta-btns{display:flex;gap:.875rem;justify-content:center;flex-wrap:wrap}
+
+/* ─────────── FOOTER ─────────── */
+footer{padding:2.5rem 5vw;border-top:1px solid rgba(79,70,229,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.foot-logo{font-weight:800;font-size:1rem;letter-spacing:-.025em;background:linear-gradient(135deg,var(--indigo),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ─────────── BACK TO TOP ─────────── */
+#btt-btn{
+  position:fixed;bottom:1.75rem;left:1.75rem;z-index:2000;
+  width:42px;height:42px;border-radius:12px;
+  background:rgba(13,17,32,.92);border:1px solid rgba(79,70,229,.28);
+  color:var(--text);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 16px rgba(0,0,0,.4),0 0 16px rgba(79,70,229,.12);
+  backdrop-filter:blur(12px);cursor:pointer;
+  opacity:0;transform:translateY(8px);pointer-events:none;
+  transition:all .28s cubic-bezier(.34,1.56,.64,1);
+}
+#btt-btn.visible{opacity:1;transform:translateY(0);pointer-events:all}
+#btt-btn:hover{
+  background:rgba(79,70,229,.22);border-color:rgba(79,70,229,.55);
+  transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 24px rgba(79,70,229,.25);
+}
+#btt-btn svg{transition:transform .2s}
+#btt-btn:hover svg{transform:translateY(-2px)}
+#cwid{position:fixed;bottom:1.75rem;right:1.75rem;z-index:3000}
+.cfab{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--indigo),var(--cyan));border:none;color:#fff;font-size:1.3rem;display:flex;align-items:center;justify-content:center;animation:fab-glow 3s ease-in-out infinite;transition:transform .2s}
+.cfab:hover{transform:scale(1.1)}
+.cwin{position:absolute;bottom:68px;right:0;width:355px;height:478px;background:rgba(8,11,22,.97);border:1px solid rgba(79,70,229,.22);border-radius:18px;overflow:hidden;box-shadow:0 22px 56px rgba(0,0,0,.65),0 0 36px rgba(79,70,229,.1);display:flex;flex-direction:column;backdrop-filter:blur(20px);opacity:0;transform:translateY(12px) scale(.96);pointer-events:none;transition:all .28s cubic-bezier(.34,1.56,.64,1)}
+.cwin.open{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
+.cwh{padding:.95rem 1.1rem .875rem;background:linear-gradient(135deg,rgba(79,70,229,.18),rgba(6,182,212,.08));border-bottom:1px solid rgba(79,70,229,.14);display:flex;align-items:center;gap:.72rem}
+.cwav{width:33px;height:33px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--indigo),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.cwn{font-weight:700;font-size:.875rem;letter-spacing:-.015em}
+.cws{font-size:.67rem;color:#34d399;font-family:var(--mono)}
+.cwx{margin-left:auto;background:none;border:none;color:var(--muted);font-size:1.05rem;cursor:pointer;transition:color .2s}
+.cwx:hover{color:var(--text)}
+.cwb{flex:1;overflow-y:auto;padding:.875rem 1rem;display:flex;flex-direction:column;gap:.6rem}
+.cwb::-webkit-scrollbar{width:3px}
+.cwb::-webkit-scrollbar-thumb{background:rgba(79,70,229,.4);border-radius:2px}
+.msg{max-width:86%;padding:.52rem .8rem;border-radius:12px;font-size:.8rem;line-height:1.56;animation:slide-up .2s ease}
+.bot{background:rgba(79,70,229,.12);border:1px solid rgba(79,70,229,.16);color:var(--text);border-bottom-left-radius:4px;align-self:flex-start}
+.usr-m{background:linear-gradient(135deg,var(--indigo),var(--blue));color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.typing{display:flex;align-items:center;gap:4px;padding:.56rem .85rem;background:rgba(79,70,229,.1);border-radius:12px;border-bottom-left-radius:4px;align-self:flex-start;border:1px solid rgba(79,70,229,.14)}
+.tdot{width:5px;height:5px;border-radius:50%;background:var(--indigo);animation:dot-pulse 1.2s infinite}
+.tdot:nth-child(2){animation-delay:.2s}.tdot:nth-child(3){animation-delay:.4s}
+.cwsugs{padding:0 1rem .7rem;display:flex;gap:.38rem;flex-wrap:wrap}
+.csug{font-size:.69rem;padding:.25rem .62rem;border-radius:100px;background:rgba(79,70,229,.09);border:1px solid rgba(79,70,229,.2);color:#a5b4fc;cursor:pointer;transition:all .2s;font-family:var(--f);font-weight:500}
+.csug:hover{background:rgba(79,70,229,.18);border-color:rgba(79,70,229,.4)}
+.cwf{padding:.72rem 1rem;border-top:1px solid rgba(79,70,229,.1);display:flex;gap:.45rem}
+.cwinp{flex:1;background:rgba(79,70,229,.07);border:1px solid rgba(79,70,229,.16);border-radius:10px;padding:.52rem .875rem;color:var(--text);font-family:var(--f);font-size:.8rem;outline:none;transition:border-color .2s}
+.cwinp::placeholder{color:var(--muted)}
+.cwinp:focus{border-color:rgba(79,70,229,.45)}
+.cwsnd{width:35px;height:35px;border-radius:9px;flex-shrink:0;background:linear-gradient(135deg,var(--indigo),var(--blue));border:none;color:#fff;font-size:.875rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.cwsnd:hover{transform:scale(1.08);box-shadow:0 0 14px rgba(79,70,229,.5)}
+
+/* ─────────── NAV DROPDOWN ─────────── */
+.nav-dd{position:relative;cursor:pointer}
+.nav-ddt{
+  color:#C4CCDA;font-size:.875rem;font-weight:500;transition:color .2s;
+  user-select:none;display:flex;align-items:center;gap:.3rem;
+  padding:.25rem .5rem;border-radius:7px;margin:-.25rem -.5rem;
+}
+.nav-ddt:hover,.nav-dd.open .nav-ddt{color:#fff}
+.nav-dd.open .nav-ddt{background:rgba(79,70,229,.08)}
+.nav-ddt .arr{
+  font-size:.6rem;opacity:.6;transition:transform .22s;display:inline-block;margin-top:.05rem;
+}
+.nav-dd.open .nav-ddt .arr{transform:rotate(180deg);opacity:1}
+.nav-ddm{
+  position:absolute;top:calc(100% + 14px);left:50%;
+  background:rgba(7,9,20,.98);border:1px solid rgba(79,70,229,.24);
+  border-radius:16px;padding:.5rem;min-width:310px;
+  box-shadow:0 24px 56px rgba(0,0,0,.7),0 0 36px rgba(79,70,229,.12);
+  backdrop-filter:blur(24px);
+  opacity:0;pointer-events:none;
+  transform:translateX(-50%) translateY(-8px);
+  transition:opacity .2s ease,transform .2s ease;
+  z-index:200;
+}
+.nav-dd.open .nav-ddm{
+  opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0);
+}
+/* arrow caret */
+.nav-ddm::before{
+  content:'';position:absolute;top:-5px;left:50%;
+  width:10px;height:10px;background:rgba(7,9,20,.98);
+  border-left:1px solid rgba(79,70,229,.24);border-top:1px solid rgba(79,70,229,.24);
+  transform:translateX(-50%) rotate(45deg);
+}
+/* section label inside menu */
+.ndm-section{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--muted);padding:.4rem .75rem .25rem;
+}
+.ndm-item{
+  display:flex;align-items:center;gap:.75rem;padding:.6rem .75rem;
+  border-radius:10px;transition:background .15s;color:var(--text);cursor:pointer;
+  text-decoration:none;
+}
+.ndm-item:hover{background:rgba(79,70,229,.14)}
+.ndm-item:hover .ndm-arr{opacity:1;transform:translateX(3px)}
+.ndm-ico{font-size:1.1rem;flex-shrink:0;width:28px;text-align:center}
+.ndm-txt{flex:1}
+.ndm-item strong{display:block;font-size:.8125rem;font-weight:600;letter-spacing:-.01em}
+.ndm-item small{display:block;font-size:.68rem;color:var(--muted);margin-top:.08rem;font-weight:400}
+.ndm-arr{
+  font-size:.75rem;color:var(--muted);opacity:0;
+  transition:all .18s;flex-shrink:0;
+}
+/* footer CTA inside dropdown */
+.ndm-footer{
+  margin-top:.375rem;padding:.625rem .75rem .25rem;
+  border-top:1px solid rgba(79,70,229,.1);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.ndm-footer-text{font-size:.72rem;color:var(--muted)}
+.ndm-footer-cta{
+  font-size:.72rem;font-weight:700;color:#a5b4fc;
+  background:rgba(79,70,229,.12);border:1px solid rgba(79,70,229,.22);
+  border-radius:6px;padding:.22rem .625rem;transition:all .15s;cursor:pointer;
+  font-family:var(--f);
+}
+.ndm-footer-cta:hover{background:rgba(79,70,229,.22);color:#fff}
+
+/* ─────────── HERO USE-CASE TICKER ─────────── */
+.hero-ticker{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.ticker-label{font-size:.75rem;color:var(--muted);font-weight:500}
+.ticker-pill{
+  padding:.28rem .875rem;border-radius:100px;font-size:.75rem;font-weight:600;
+  background:rgba(79,70,229,.12);border:1px solid rgba(79,70,229,.24);color:#a5b4fc;
+  transition:all .4s ease;white-space:nowrap;
+}
+.ticker-pill.active{background:rgba(79,70,229,.22);border-color:rgba(79,70,229,.5);color:#fff;box-shadow:0 0 12px rgba(79,70,229,.3)}
+
+/* ─────────── USE CASES SECTION ─────────── */
+#usecases{background:var(--bg2);border-top:1px solid rgba(79,70,229,.07)}
+
+/* Tab bar */
+.uc-tabs{
+  display:flex;gap:.375rem;
+  background:rgba(10,13,26,.8);border:1px solid rgba(79,70,229,.14);
+  border-radius:14px;padding:.375rem;margin:2.75rem 0 2.5rem;
+  flex-wrap:wrap;
+}
+.uc-tab{
+  flex:1;min-width:130px;padding:.625rem .75rem;border-radius:10px;border:none;
+  background:transparent;color:var(--muted);font-family:var(--f);font-size:.8rem;
+  font-weight:600;cursor:pointer;transition:all .22s;display:flex;flex-direction:column;
+  align-items:center;gap:.3rem;text-align:center;line-height:1.3;
+}
+.uc-tab:hover{color:var(--text);background:rgba(79,70,229,.08)}
+.uc-tab.active{background:linear-gradient(135deg,rgba(79,70,229,.22),rgba(6,182,212,.1));color:var(--text);box-shadow:0 0 20px rgba(79,70,229,.12);border:1px solid rgba(79,70,229,.25)}
+.uc-tab-ico{font-size:1.25rem}
+.uc-tab-lbl{font-size:.72rem;font-weight:600}
+
+/* Panel */
+.uc-panels{position:relative}
+.uc-panel{display:none}
+.uc-panel.active{display:block;animation:slide-up .35s ease}
+
+/* Panel inner layout */
+.uc-panel-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;
+}
+
+/* Left: description column */
+.uc-desc-col{}
+.uc-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(79,70,229,.1);border:1px solid rgba(79,70,229,.22);
+  border-radius:100px;padding:.28rem .875rem;
+  font-family:var(--mono);font-size:.66rem;color:#a5b4fc;margin-bottom:1rem;
+}
+.uc-title{font-weight:800;font-size:clamp(1.5rem,2.5vw,2.125rem);letter-spacing:-.035em;line-height:1.15;margin-bottom:.875rem}
+.uc-desc{font-size:.9375rem;color:var(--muted);line-height:1.75;margin-bottom:1.75rem}
+.uc-highlights{display:flex;flex-direction:column;gap:.625rem;margin-bottom:2rem}
+.uc-hl{
+  display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 1rem;
+  background:rgba(79,70,229,.07);border:1px solid rgba(79,70,229,.12);
+  border-radius:11px;transition:all .22s;
+}
+.uc-hl:hover{border-color:rgba(79,70,229,.3);background:rgba(79,70,229,.12)}
+.uc-hl-ico{font-size:1rem;flex-shrink:0;margin-top:.1rem}
+.uc-hl-t{font-weight:600;font-size:.875rem;letter-spacing:-.01em;margin-bottom:.18rem}
+.uc-hl-b{font-size:.775rem;color:var(--muted);line-height:1.55}
+.uc-cta-row{display:flex;gap:.75rem;flex-wrap:wrap}
+
+/* Right: flow/process visual */
+.uc-flow-col{}
+.uc-flow-card{
+  background:rgba(10,13,26,.92);border:1px solid rgba(79,70,229,.2);
+  border-radius:18px;padding:1.625rem;
+  box-shadow:0 0 40px rgba(79,70,229,.08),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.uc-flow-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:1.25rem;padding-bottom:.875rem;
+  border-bottom:1px solid rgba(79,70,229,.1);
+}
+.uc-flow-title{font-family:var(--mono);font-size:.67rem;color:var(--muted)}
+.uc-flow-live{display:flex;align-items:center;gap:.35rem;font-family:var(--mono);font-size:.66rem;color:#34d399}
+
+/* Process steps inside the flow card */
+.uc-steps{display:flex;flex-direction:column;gap:.5rem}
+.uc-step{
+  display:flex;align-items:flex-start;gap:.875rem;
+  padding:.75rem 1rem;border-radius:10px;
+  background:rgba(79,70,229,.06);border:1px solid rgba(79,70,229,.1);
+  transition:all .25s;position:relative;
+}
+.uc-step:hover{border-color:rgba(79,70,229,.28);background:rgba(79,70,229,.1)}
+.uc-step-num{
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--indigo),var(--cyan));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:.6rem;font-weight:500;color:#fff;margin-top:.05rem;
+}
+.uc-step-t{font-weight:600;font-size:.8125rem;letter-spacing:-.01em;margin-bottom:.18rem}
+.uc-step-b{font-size:.75rem;color:var(--muted);line-height:1.5}
+.uc-step-tag{
+  margin-left:auto;flex-shrink:0;align-self:flex-start;
+  padding:.15rem .5rem;border-radius:100px;font-family:var(--mono);font-size:.6rem;
+  background:rgba(52,211,153,.09);color:#34d399;border:1px solid rgba(52,211,153,.18);
+}
+/* connector line between steps */
+.uc-step::after{
+  content:'';position:absolute;left:1.9rem;bottom:-8px;
+  width:1px;height:8px;background:rgba(79,70,229,.3);
+}
+.uc-step:last-child::after{display:none}
+
+/* channel chips at bottom of flow */
+.uc-channels{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.125rem;padding-top:1rem;border-top:1px solid rgba(79,70,229,.08)}
+.uc-ch{padding:.25rem .65rem;border-radius:100px;font-family:var(--mono);font-size:.65rem;font-weight:500}
+.ch-wa{background:rgba(37,211,102,.1);color:#4ade80;border:1px solid rgba(37,211,102,.2)}
+.ch-em{background:rgba(234,67,53,.08);color:#f87171;border:1px solid rgba(234,67,53,.18)}
+.ch-cr{background:rgba(6,182,212,.1);color:#67e8f9;border:1px solid rgba(6,182,212,.2)}
+.ch-ai{background:rgba(79,70,229,.12);color:#a5b4fc;border:1px solid rgba(79,70,229,.24)}
+.ch-vc{background:rgba(168,85,247,.1);color:#d8b4fe;border:1px solid rgba(168,85,247,.2)}
+.ch-sl{background:rgba(255,166,0,.08);color:#fbbf24;border:1px solid rgba(255,166,0,.18)}
+
+/* home-page use case strip (above fold preview) */
+.uc-strip{
+  display:flex;gap:1rem;margin-top:2.75rem;flex-wrap:wrap;
+}
+.uc-strip-item{
+  flex:1;min-width:160px;padding:1.125rem 1.25rem;
+  background:rgba(13,17,32,.75);border:1px solid var(--border);
+  border-radius:14px;cursor:pointer;transition:all .28s;
+}
+.uc-strip-item:hover{border-color:rgba(79,70,229,.38);transform:translateY(-3px);box-shadow:0 14px 28px rgba(0,0,0,.25),0 0 16px rgba(79,70,229,.08)}
+.uc-strip-ico{font-size:1.5rem;margin-bottom:.5rem}
+.uc-strip-t{font-weight:700;font-size:.8125rem;letter-spacing:-.01em;margin-bottom:.2rem}
+.uc-strip-s{font-size:.72rem;color:var(--muted);line-height:1.4}
+
+/* ── REAL AUDIO PLAYER EXTRAS ── */
+.pl-live-tag{
+  display:flex;align-items:center;gap:.4rem;
+  font-family:var(--mono);font-size:.64rem;font-weight:500;color:#34d399;
+  background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);
+  border-radius:100px;padding:.22rem .65rem;flex-shrink:0;
+}
+.speaker-row{
+  display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;
+}
+.speaker-chip{
+  flex:1;display:flex;align-items:center;gap:.625rem;
+  padding:.6rem .875rem;border-radius:11px;
+}
+.speaker-ai{background:rgba(79,70,229,.1);border:1px solid rgba(79,70,229,.18)}
+.speaker-cand{background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.18)}
+.speaker-divider{color:var(--muted);font-size:.8rem;flex-shrink:0}
+.sp-av{
+  width:30px;height:30px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:.875rem;
+}
+.sp-ai-av{background:linear-gradient(135deg,var(--indigo),var(--cyan))}
+.sp-cand-av{background:rgba(6,182,212,.2)}
+.sp-name{font-weight:700;font-size:.775rem;letter-spacing:-.01em}
+.sp-role{font-size:.65rem;color:var(--muted);margin-top:.08rem}
+.sp-wav{display:flex;align-items:center;gap:2px;margin-left:auto;opacity:0;transition:opacity .3s}
+.sp-wav.active{opacity:1}
+.sp-wav .wb{height:8px;width:2px}
+
+/* Playhead on waveform */
+.wf-playhead{
+  position:absolute;top:0;bottom:0;width:2px;
+  background:var(--cyan);box-shadow:0 0 6px var(--cyan);
+  pointer-events:none;transition:left .1s linear;
+}
+.wf-wrap{cursor:pointer}
+.wf-wrap:hover .wf-playhead{box-shadow:0 0 10px var(--cyan)}
+
+/* Volume slider */
+.vol-wrap{
+  display:flex;align-items:center;gap:.5rem;
+  margin-left:auto;
+}
+.vol-slider{
+  -webkit-appearance:none;appearance:none;
+  width:72px;height:3px;border-radius:2px;
+  background:rgba(79,70,229,.3);outline:none;cursor:pointer;
+}
+.vol-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;width:12px;height:12px;border-radius:50%;
+  background:linear-gradient(135deg,var(--indigo),var(--cyan));
+  box-shadow:0 0 6px var(--indigo);
+}
+
+/* Now Playing floating badge */
+.now-playing-badge{
+  display:inline-flex;align-items:center;gap:.625rem;margin-top:1.5rem;
+  background:rgba(79,70,229,.1);border:1px solid rgba(79,70,229,.22);
+  border-radius:100px;padding:.35rem 1rem .35rem .625rem;
+  animation:badge-glow 2s ease-in-out infinite;
+}
+.np-eq{display:flex;align-items:flex-end;gap:2px;height:14px}
+.np-eq span{
+  display:block;width:2px;border-radius:1px;
+  background:linear-gradient(180deg,var(--cyan),var(--indigo));
+}
+.np-eq span:nth-child(1){height:60%;animation:eq-bar .5s ease-in-out infinite}
+.np-eq span:nth-child(2){height:100%;animation:eq-bar .5s ease-in-out infinite .1s}
+.np-eq span:nth-child(3){height:70%;animation:eq-bar .5s ease-in-out infinite .2s}
+.np-eq span:nth-child(4){height:85%;animation:eq-bar .5s ease-in-out infinite .05s}
+.np-text{font-family:var(--mono);font-size:.68rem;color:#a5b4fc}
+
+/* ── REAL AUDIO PLAYER EXTRAS ── */
+@media(max-width:960px){
+  .hero-grid,.audio-grid,.uc-panel-inner{grid-template-columns:1fr}
+  .sim,.hero-sim{display:none}
+  .rf-grid,.prob-grid,.met-grid,.usr-grid{grid-template-columns:1fr}
+  .tr-grid{grid-template-columns:1fr 1fr}
+  .kpi-row{grid-template-columns:1fr 1fr}
+  .dash-body{grid-template-columns:1fr}
+  .dash-sb{display:none}
+  .net{height:380px}
+  .nav-links{display:none}
+  .cwin{width:320px;height:440px}
+  .uc-tabs{gap:.25rem}
+  .uc-tab{min-width:100px;padding:.5rem .5rem}
+  .uc-tab-lbl{display:none}
+  .uc-strip{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="cursor:pointer" title="Back to top">Voxket HR</div>
+  <div class="nav-links">
+    <div class="nav-dd" id="nav-dd">
+      <span class="nav-ddt" onclick="toggleDD(event)">Platform <span class="arr">▼</span></span>
+      <div class="nav-ddm" id="nav-ddm">
+        <div class="ndm-section">AI Agent Use Cases</div>
+        <a class="ndm-item" onclick="navToUC(0)"><span class="ndm-ico">🧩</span><span class="ndm-txt"><strong>AI Onboarding</strong><small>End-to-end doc collection &amp; verification</small></span><span class="ndm-arr">→</span></a>
+        <a class="ndm-item" onclick="navToUC(1)"><span class="ndm-ico">💬</span><span class="ndm-txt"><strong>AI Buddy</strong><small>New joiner companion &amp; support</small></span><span class="ndm-arr">→</span></a>
+        <a class="ndm-item" onclick="navToUC(2)"><span class="ndm-ico">🔄</span><span class="ndm-txt"><strong>End-to-End Recruitment</strong><small>Full hiring lifecycle automation</small></span><span class="ndm-arr">→</span></a>
+        <a class="ndm-item" onclick="navToUC(3)"><span class="ndm-ico">📞</span><span class="ndm-txt"><strong>HR Calling Agent</strong><small>Warm/cold lead outreach &amp; qualification</small></span><span class="ndm-arr">→</span></a>
+        <a class="ndm-item" onclick="navToUC(4)"><span class="ndm-ico">📅</span><span class="ndm-txt"><strong>Interview Scheduling</strong><small>AI slot booking &amp; confirmations</small></span><span class="ndm-arr">→</span></a>
+        <a class="ndm-item" onclick="navToUC(5)"><span class="ndm-ico">⚡</span><span class="ndm-txt"><strong>AI Workflow Engine</strong><small>Custom HR workflows on demand</small></span><span class="ndm-arr">→</span></a>
+        <div class="ndm-footer">
+          <span class="ndm-footer-text">6 AI agents · Fully autonomous</span>
+          <button class="ndm-footer-cta" onclick="navToUC(0)">Explore Platform →</button>
+        </div>
+      </div>
+    </div>
+    <a href="#agents">AI Agents</a>
+    <a href="#audio">Hear It Work</a>
+    <a href="#compare">Compare</a>
+  </div>
+  <div class="nav-acts">
+    <button class="btn btn-sm btn-ghost" onclick="goto('audio')">▶ Hear AI Call</button>
+    <a href="https://calendly.com/admin-voxket/demo" target="_blank"><button class="btn btn-sm btn-solid">Book Demo</button></a>
+  </div>
+</nav>
+
+<!-- BACK TO TOP BUTTON -->
+<button id="btt-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 12V4M8 4L4 8M8 4L12 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="grid-bg"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge"><span class="ldot"></span>Voice-First AI Workforce · Powered by Voxket</div>
+        <h1 class="d1 hero-h1">Stop Managing HR.<br><span class="grad">Start Running an<br>AI Workforce.</span></h1>
+        <p class="hero-sub">Voxket HR deploys intelligent AI agents that call, follow up, schedule, and onboard — autonomously. No dashboards. Just execution.</p>
+        <div class="hero-btns">
+          <a href="https://calendly.com/admin-voxket/demo" target="_blank"><button class="btn btn-md btn-glow">▶ Watch AI in Action</button></a>
+          <a href="https://calendly.com/admin-voxket/demo" target="_blank"><button class="btn btn-md btn-ghost">Book Enterprise Demo →</button></a>
+        </div>
+        <div class="hero-ticker" id="hero-ticker">
+          <span class="ticker-label">Automates:</span>
+          <span class="ticker-pill active" onclick="gotoUC(0)">AI Onboarding</span>
+          <span class="ticker-pill" onclick="gotoUC(1)">AI Buddy</span>
+          <span class="ticker-pill" onclick="gotoUC(2)">Recruitment</span>
+          <span class="ticker-pill" onclick="gotoUC(3)">HR Calling</span>
+          <span class="ticker-pill" onclick="gotoUC(4)">Scheduling</span>
+          <span class="ticker-pill" onclick="gotoUC(5)">Workflows</span>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-v" data-target="70" data-suf="%↓">0%</div><div class="stat-l">Manual HR work</div></div>
+          <div><div class="stat-v" data-target="2" data-suf="×">0×</div><div class="stat-l">Faster hiring</div></div>
+          <div><div class="stat-v" data-target="90" data-suf="%">0%</div><div class="stat-l">Onboarding completion</div></div>
+        </div>
+      </div>
+      <div class="sim">
+        <div class="sim-bar">
+          <span class="sim-tag">voxket://hr-agent/active-call</span>
+          <span class="sim-live"><span class="ldot"></span>LIVE</span>
+        </div>
+        <div class="sim-caller">
+          <div class="sim-av">VA</div>
+          <div><div class="call-name">Voxket AI Agent</div><div class="call-role">Calling · Rahul Sharma · Sr. Engineer</div></div>
+          <div class="wav"><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div></div>
+        </div>
+        <div class="tx-box" id="txbox"></div>
+        <div class="chips">
+          <span class="chip chip-q chip-on" id="cq">✓ Qualified</span>
+          <span class="chip chip-s" id="cs">⏳ Scheduled</span>
+          <span class="chip chip-o" id="co">📋 Onboarding</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFRAME -->
+<section id="reframe">
+  <div class="wrap">
+    <div class="sec-label">Core Philosophy</div>
+    <h2 class="h2 reveal">This isn't HR software.</h2>
+    <p class="sm muted reveal" style="max-width:500px;margin-top:.75rem">It's an AI system that executes HR operations — autonomously, at scale, 24/7.</p>
+    <div class="rf-grid">
+      <div class="card rf-card reveal"><div class="rf-x">Not dashboards</div><div class="rf-arr">→</div><div class="rf-t">Execution Engine</div><p class="rf-b">AI that actually does the work — calls, emails, follow-ups — not just visualises it on a screen.</p></div>
+      <div class="card rf-card reveal"><div class="rf-x">Not analytics</div><div class="rf-arr">→</div><div class="rf-t">Autonomous Workflows</div><p class="rf-b">End-to-end hiring and onboarding flows that run without any human intervention whatsoever.</p></div>
+      <div class="card rf-card reveal"><div class="rf-x">Not tools</div><div class="rf-arr">→</div><div class="rf-t">AI Workforce</div><p class="rf-b">Specialised AI agents — each an expert in its role — collectively forming your entire HR backbone.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="wrap">
+    <div class="sec-label">The Reality</div>
+    <h2 class="h2 reveal">Your HR team is <span class="grad">drowning.</span></h2>
+    <p class="sm muted reveal" style="max-width:490px;margin-top:.75rem">Repetitive manual work is killing productivity, morale, and candidate experience.</p>
+    <div class="prob-grid">
+      <div class="prob-card reveal"><div class="prob-ico">🔄</div><div><div class="prob-t">Endless Follow-ups</div><p class="prob-b">Recruiters spend hours chasing candidates who never reply. Every ping is manual; every delay costs a hire.</p></div></div>
+      <div class="prob-card reveal"><div class="prob-ico">👻</div><div><div class="prob-t">Candidates Ghosting</div><p class="prob-b">Top talent disappears mid-funnel. No automated re-engagement. No intelligent timing. Just silence.</p></div></div>
+      <div class="prob-card reveal"><div class="prob-ico">🌪️</div><div><div class="prob-t">Manual Onboarding Chaos</div><p class="prob-b">Document collection, form submissions, IT setup — all tracked in spreadsheets. This is inexcusable in 2025.</p></div></div>
+      <div class="prob-card reveal"><div class="prob-ico">🔥</div><div><div class="prob-t">HR Burnout</div><p class="prob-b">Your best HR people are buried in operational drudgery instead of strategy, culture, and growth.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section id="agents">
+  <div class="wrap" style="text-align:center">
+    <div class="sec-label" style="justify-content:center">The AI System</div>
+    <h2 class="h2 reveal">Meet your <span class="grad">AI HR Workforce</span></h2>
+    <p class="sm muted reveal" style="max-width:500px;margin:.75rem auto 0">Four specialised agents, one unified intelligence. Each an expert. Together, unstoppable.</p>
+    <div class="net">
+      <svg class="net-svg" viewBox="0 0 600 500"><defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4F46E5" stop-opacity=".55"/><stop offset="100%" stop-color="#06B6D4" stop-opacity=".55"/></linearGradient></defs>
+        <line x1="300" y1="250" x2="300" y2="72" class="cline"/>
+        <line x1="300" y1="250" x2="528" y2="225" class="cline" style="animation-delay:-.5s"/>
+        <line x1="300" y1="250" x2="300" y2="428" class="cline" style="animation-delay:-1s"/>
+        <line x1="300" y1="250" x2="72" y2="225" class="cline" style="animation-delay:-1.5s"/>
+      </svg>
+      <div class="cn"><div class="cn-ico">🧠</div><div class="cn-lbl">VOXKET<br>AI BRAIN</div></div>
+      <div class="an n-top reveal"><div class="an-ico">📞</div><div class="an-lbl">Calling<br>Agent</div><div class="mwav"><div class="mb"></div><div class="mb"></div><div class="mb"></div><div class="mb"></div><div class="mb"></div></div></div>
+      <div class="an n-right reveal"><div class="an-ico">📅</div><div class="an-lbl">Scheduling<br>Agent</div><div class="an-sub">Auto-fills calendar</div></div>
+      <div class="an n-bot reveal"><div class="an-ico">📋</div><div class="an-lbl">Onboarding<br>Agent</div><div class="an-sub">Auto-verifies docs</div></div>
+      <div class="an n-left reveal"><div class="an-ico">💬</div><div class="an-lbl">HR Buddy<br>Agent</div><div class="an-sub">24/7 chat support</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section id="usecases">
+  <div class="wrap">
+    <div class="sec-label">Platform · AI Agent Use Cases</div>
+    <h2 class="h2 reveal">Six AI agents. <span class="grad">Every HR workflow — automated.</span></h2>
+    <p class="sm muted reveal" style="max-width:580px;margin-top:.75rem">From the moment a candidate is sourced to the day an employee is fully onboarded — Voxket HR executes every step autonomously. Select a use case to explore the full workflow.</p>
+
+    <!-- TAB BAR -->
+    <div class="uc-tabs reveal" id="uc-tabs">
+      <button class="uc-tab active" onclick="switchTab(0)"><span class="uc-tab-ico">🧩</span><span class="uc-tab-lbl">AI Onboarding</span></button>
+      <button class="uc-tab" onclick="switchTab(1)"><span class="uc-tab-ico">💬</span><span class="uc-tab-lbl">AI Buddy</span></button>
+      <button class="uc-tab" onclick="switchTab(2)"><span class="uc-tab-ico">🔄</span><span class="uc-tab-lbl">Recruitment</span></button>
+      <button class="uc-tab" onclick="switchTab(3)"><span class="uc-tab-ico">📞</span><span class="uc-tab-lbl">HR Calling</span></button>
+      <button class="uc-tab" onclick="switchTab(4)"><span class="uc-tab-ico">📅</span><span class="uc-tab-lbl">Scheduling</span></button>
+      <button class="uc-tab" onclick="switchTab(5)"><span class="uc-tab-ico">⚡</span><span class="uc-tab-lbl">AI Workflows</span></button>
+    </div>
+
+    <!-- PANELS -->
+    <div class="uc-panels">
+
+      <!-- PANEL 0: AI ONBOARDING -->
+      <div class="uc-panel active" id="ucp-0">
+        <div class="uc-panel-inner">
+          <div class="uc-desc-col">
+            <div class="uc-badge"><span class="ldot"></span> AI Onboarding Agent</div>
+            <h3 class="uc-title">Zero-touch onboarding.<br><span class="grad">From offer to Day 1.</span></h3>
+            <p class="uc-desc">The moment a candidate accepts an offer, the AI Onboarding Agent takes over completely. It collects personal and professional details, requests and verifies documents, checks completeness, and chases any missing items — without a single HR touchpoint.</p>
+            <div class="uc-highlights">
+              <div class="uc-hl"><span class="uc-hl-ico">📋</span><div><div class="uc-hl-t">Smart Document Collection</div><div class="uc-hl-b">Collects PAN, Aadhaar, degree certificates, experience letters, bank details — via guided chat or portal.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">✅</span><div><div class="uc-hl-t">AI Document Verification</div><div class="uc-hl-b">Evaluates document authenticity, checks expiry dates, validates formats — flags errors instantly.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">🔁</span><div><div class="uc-hl-t">Automated Chase Engine</div><div class="uc-hl-b">If documents are missing or incorrect, the agent triggers email, WhatsApp, and voice follow-ups on a smart schedule.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">🔗</span><div><div class="uc-hl-t">CRM & HRMS Sync</div><div class="uc-hl-b">All data and documents are pushed to your CRM, HRMS, or any system via API — approval flows configurable per org.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">🔧</span><div><div class="uc-hl-t">Fully Configurable Flows</div><div class="uc-hl-b">Onboarding workflows adapt to any business — department-specific flows, role-based doc requirements, custom approvals.</div></div></div>
+            </div>
+            <div class="uc-cta-row">
+              <a href="https://calendly.com/admin-voxket/demo" target="_blank"><button class="btn btn-md btn-glow">See It Live →</button></a>
+              <a href="https://calendly.com/admin-voxket/demo" target="_blank"><button class="btn btn-md btn-ghost">Talk to Sales</button></a>
+            </div>
+          </div>
+          <div class="uc-flow-col">
+            <div class="uc-flow-card">
+              <div class="uc-flow-header">
+                <span class="uc-flow-title">voxket://onboarding-agent/flow</span>
+                <span class="uc-flow-live"><span class="ldot"></span>AUTONOMOUS</span>
+              </div>
+              <div class="uc-steps">
+                <div class="uc-step"><div class="uc-step-num">1</div><div><div class="uc-step-t">Offer Accepted → Agent Triggered</div><div class="uc-step-b">CRM/ATS status change fires the Onboarding Agent instantly. Welcome message sent via WhatsApp + Email.</div></div><span class="uc-step-tag">Auto</span></div>
+                <div class="uc-step"><div class="uc-step-num">2</div><div><div class="uc-step-t">Personal & Professional Details Collected</div><div class="uc-step-b">AI-guided conversation collects name, address, education history, previous employment — conversationally.</div></div><span class="uc-step-tag">AI</span></div>
+                <div class="uc-step"><div class="uc-step-num">3</div><div><div class="uc-step-t">Document Upload Requested</div><div class="uc-step-b">Agent sends a smart checklist — PAN, Aadhaar, degree certs, bank details, photo — with upload links.</div></div><span class="uc-step-tag">AI</span></div>
+                <div class="uc-step"><div class="uc-step-num">4</div><div><div class="uc-step-t">AI Verifies Every Document</div><div class="uc-step-b">Each upload is evaluated for correctness, expiry, and format. Incorrect docs are flagged with specific reasons.</div></div><span class="uc-step-tag">AI</span></div>
+                <div class="uc-step"><div class="uc-step-num">5</div><div><div class="uc-step-t">Chase Engine Activates if Incomplete</div><div class="uc-step-b">Smart follow-up cadence via Email, WhatsApp, and voice call until all docs are verified and complete.</div></div><span class="uc-step-tag">Auto</span></div>
+                <div class="uc-step"><div class="uc-step-num">6</div><div><div class="uc-step-t">Data Pushed to CRM / HRMS + Approval</div><div class="uc-step-b">All data synced. Approval flow triggered if configured. HR notified only on exception or final sign-off.</div></div><span class="uc-step-tag">Done</span></div>
+              </div>
+              <div class="uc-channels">
+                <span class="uc-ch ch-wa">WhatsApp</span>
+                <span class="uc-ch ch-em">Email</span>
+                <span class="uc-ch ch-ai">Voice AI</span>
+                <span class="uc-ch ch-cr">CRM Sync</span>
+                <span class="uc-ch ch-ai">Doc Verify</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 1: AI BUDDY -->
+      <div class="uc-panel" id="ucp-1">
+        <div class="uc-panel-inner">
+          <div class="uc-desc-col">
+            <div class="uc-badge"><span class="ldot"></span> AI Buddy Agent</div>
+            <h3 class="uc-title">Every new joiner's<br><span class="grad">AI companion from Day 1.</span></h3>
+            <p class="uc-desc">AI Buddy is always-on support for every new employee — answering HR questions, guiding through company policies, helping with tool setup, and ensuring a smooth first 90 days. Zero HR bandwidth required.</p>
+            <div class="uc-highlights">
+              <div class="uc-hl"><span class="uc-hl-ico">💬</span><div><div class="uc-hl-t">Instant HR Answers, 24/7</div><div class="uc-hl-b">Leave policies, payroll dates, IT setup, org charts — AI Buddy answers instantly, in the employee's language.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">🗺️</span><div><div class="uc-hl-t">Personalised Onboarding Journey</div><div class="uc-hl-b">Day-by-day checklist guidance — what to complete, who to meet, what to read — proactively pushed to the joiner.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">📣</span><div><div class="uc-hl-t">Policy & Culture Navigator</div><div class="uc-hl-b">Company handbook, code of conduct, benefits — AI Buddy surfaces the right info at the right moment.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">📊</span><div><div class="uc-hl-t">Sentiment & Engagement Tracking</div><div class="uc-hl-b">Regular check-ins flag disengaged joiners early. HR is alerted only when intervention is truly needed.</div></div></div>
+            </div>
+            <div class="uc-cta-row">
+              <a href="https://calendly.com/admin-voxket/demo" target="_blank"><button class="btn btn-md btn-glow">See It Live →</button></a>
+            </div>
+          </div>
+          <div class="uc-flow-col">
+            <div class="uc-flow-card">
+              <div class="uc-flow-header">
+                <span class="uc-flow-title">voxket://buddy-agent/new-joiner</span>
+                <span class="uc-flow-live"><span class="ldot"></span>ALWAYS ON</span>
+              </div>
+              <div class="uc-steps">
+                <div class="uc-step"><div class="uc-step-num">1</div><div><div class="uc-step-t">Day 0: Welcome & Orientation</div><div class="uc-step-b">AI Buddy introduces itself via WhatsApp/Chat, shares the first-day agenda and access links automatically.</div></div><span class="uc-step-tag">Auto</span></div>
+                <div class="uc-step"><div class="uc-step-num">2</div><div><div class="uc-step-t">Guided Tool & System Setup</div><div class="uc-step-b">Step-by-step setup for email, Slack, HRMS portal, laptop config — AI walks the joiner through each.</div></div><span class="uc-step-tag">AI</span></div>
+                <div class="uc-step"><div class="uc-step-num">3</div><div><div class="uc-step-t">Daily Check-ins (Week 1–4)</div><div class="uc-step-b">Proactive "How's your first week?" nudges. Tracks completion of onboarding milestones.</div></div><span class="uc-step-tag">AI</span></div>
+                <div class="uc-step"><div class="uc-step-num">4</div><div><div class="uc-step-t">Q&A & Policy Support, 24/7</div><div class="uc-step-b">Employee asks questions anytime — leave balance, payroll, team org, benefits. Instant accurate answers.</div></div><span class="uc-step-tag">Live</span></div>
+                <div class="uc-step"><div class="uc-step-num">5</div><div><div class="uc-step-t">30–60–90 Day Reviews Triggered</div><div class="uc-step-b">Automated milestones send feedback surveys, flag issues, and schedule manager check-ins automatically.</div></div><span class="uc-step-tag">Auto</span></div>
+              </div>
+              <div class="uc-channels">
+                <span class="uc-ch ch-wa">WhatsApp</span>
+                <span class="uc-ch ch-ai">Chat Widget</span>
+                <span class="uc-ch ch-em">Email</span>
+                <span class="uc-ch ch-sl">Slack</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: END-TO-END RECRUITMENT -->
+      <div class="uc-panel" id="ucp-2">
+        <div class="uc-panel-inner">
+          <div class="uc-desc-col">
+            <div class="uc-badge"><span class="ldot"></span> Recruitment AI Workforce</div>
+            <h3 class="uc-title">Full-cycle hiring.<br><span class="grad">Zero manual execution.</span></h3>
+            <p class="uc-desc">From sourcing to offer letter, Voxket's Recruitment AI Workforce handles every step — outreach, screening, qualification, scheduling, follow-ups, offer dispatch — end to end. Your recruiters focus on strategy, not execution.</p>
+            <div class="uc-highlights">
+              <div class="uc-hl"><span class="uc-hl-ico">🎯</span><div><div class="uc-hl-t">Autonomous Sourcing & Outreach</div><div class="uc-hl-b">AI identifies candidates from your database or job boards, crafts personalised outreach, and sends at optimal times.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">📞</span><div><div class="uc-hl-t">Voice AI Screening at Scale</div><div class="uc-hl-b">AI calls every applicant, conducts structured screening, and qualifies them against role criteria — 24/7.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">🔄</span><div><div class="uc-hl-t">Ghost-Proof Follow-up Engine</div><div class="uc-hl-b">Multi-channel re-engagement — email, WhatsApp, voice — on a smart cadence until response or disqualification.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">📄</span><div><div class="uc-hl-t">Offer Letter Automation</div><div class="uc-hl-b">On approval, AI generates and dispatches the offer letter, collects acceptance, and triggers onboarding.</div></div></div>
+            </div>
+            <div class="uc-cta-row">
+              <a href="https://calendly.com/admin-voxket/demo" target="_blank"><button class="btn btn-md btn-glow">See Full Flow →</button></a>
+            </div>
+          </div>
+          <div class="uc-flow-col">
+            <div class="uc-flow-card">
+              <div class="uc-flow-header">
+                <span class="uc-flow-title">voxket://recruitment/full-cycle</span>
+                <span class="uc-flow-live"><span class="ldot"></span>RUNNING</span>
+              </div>
+              <div class="uc-steps">
+                <div class="uc-step"><div class="uc-step-num">1</div><div><div class="uc-step-t">JD Published → Candidates Sourced</div><div class="uc-step-b">AI parses job description, searches candidate pool, and shortlists profiles matching tech stack and experience.</div></div><span class="uc-step-tag">AI</span></div>
+                <div class="uc-step"><div class="uc-step-num">2</div><div><div class="uc-step-t">Personalised Outreach Sent</div><div class="uc-step-b">Tailored email + WhatsApp message sent to each candidate. AI tracks open rates and adjusts timing.</div></div><span class="uc-step-tag">Auto</span></div>
+                <div class="uc-step"><div class="uc-step-num">3</div><div><div class="uc-step-t">Voice Screening Call Placed</div><div class="uc-step-b">AI calls interested candidates, conducts structured screening, qualifies in real-time, updates ATS.</div></div><span class="uc-step-tag">Voice AI</span></div>
+                <div class="uc-step"><div class="uc-step-num">4</div><div><div class="uc-step-t">Qualified → Interview Booked</div><div class="uc-step-b">Scheduling Agent books interview, sends calendar invites and confirmations to all parties.</div></div><span class="uc-step-tag">Auto</span></div>
+                <div class="uc-step"><div class="uc-step-num">5</div><div><div class="uc-step-t">Offer Generated & Dispatched</div><div class="uc-step-b">On hiring decision, AI auto-generates offer letter, sends for digital acceptance, triggers onboarding flow.</div></div><span class="uc-step-tag">Done</span></div>
+              </div>
+              <div class="uc-channels">
+                <span class="uc-ch ch-ai">Voice AI</span>
+                <span class="uc-ch ch-wa">WhatsApp</span>
+                <span class="uc-ch ch-em">Email</span>
+                <span class="uc-ch ch-cr">ATS Sync</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 3: HR CALLING AGENT -->
+      <div class="uc-panel" id="ucp-3">
+        <div class="uc-panel-inner">
+          <div class="uc-desc-col">
+            <div class="uc-badge"><span class="ldot"></span> HR Calling Agent</div>
+            <h3 class="uc-title">AI calls candidates.<br><span class="grad">Warm leads. Cold leads. Handled.</span></h3>
+            <p class="uc-desc">The HR Calling Agent proactively reaches out to passive candidates, analyses whether they're open to a job change, qualifies them by tech stack and role fit, and seamlessly transfers warm leads to a human recruiter — all in one fluid call.</p>
+            <div class="uc-highlights">
+              <div class="uc-hl"><span class="uc-hl-ico">🌡️</span><div><div class="uc-hl-t">Warm & Cold Lead Analysis</div><div class="uc-hl-b">AI determines job-change intent through natural conversation — identifies warm leads for immediate follow-up vs nurture tracks.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">🛠️</span><div><div class="uc-hl-t">Tech Stack & Role Qualification</div><div class="uc-hl-b">AI probes skills, experience, notice period, salary expectations — qualifies precisely against open roles.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">📨</span><div><div class="uc-hl-t">Post-Call Automated Outreach</div><div class="uc-hl-b">Based on call outcome, AI sends tailored emails and WhatsApp messages — JD for interested, nurture sequence for cold.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">🤝</span><div><div class="uc-hl-t">Seamless Human Handoff</div><div class="uc-hl-b">When a candidate is warm and ready, AI transfers the call to a human recruiter in real-time with full context.</div></div></div>
+            </div>
+            <div class="uc-cta-row">
+              <a href="https://calendly.com/admin-voxket/demo" target="_blank"><button class="btn btn-md btn-glow">Hear a Live Call →</button></a>
+            </div>
+          </div>
+          <div class="uc-flow-col">
+            <div class="uc-flow-card">
+              <div class="uc-flow-header">
+                <span class="uc-flow-title">voxket://calling-agent/outreach</span>
+                <span class="uc-flow-live"><span class="ldot"></span>LIVE CALL</span>
+              </div>
+              <div class="uc-steps">
+                <div class="uc-step"><div class="uc-step-num">1</div><div><div class="uc-step-t">Candidate List Loaded → AI Dials</div><div class="uc-step-b">AI calls each candidate at optimal time. Uses natural voice — candidate doesn't know it's AI unless told.</div></div><span class="uc-step-tag">Voice AI</span></div>
+                <div class="uc-step"><div class="uc-step-num">2</div><div><div class="uc-step-t">Intent Detection: Open to Move?</div><div class="uc-step-b">AI asks conversationally about job satisfaction, openness to explore. Classifies warm / cold / not-now.</div></div><span class="uc-step-tag">AI</span></div>
+                <div class="uc-step"><div class="uc-step-num">3</div><div><div class="uc-step-t">Role & Stack Qualification</div><div class="uc-step-b">For warm leads — AI screens for skills, experience level, notice period, CTC expectations.</div></div><span class="uc-step-tag">AI</span></div>
+                <div class="uc-step"><div class="uc-step-num">4</div><div><div class="uc-step-t">Mail + WhatsApp Sent Post-Call</div><div class="uc-step-b">Warm: JD + meeting link. Cold: nurture email sequence. All sent automatically based on call outcome.</div></div><span class="uc-step-tag">Auto</span></div>
+                <div class="uc-step"><div class="uc-step-num">5</div><div><div class="uc-step-t">Human Recruiter Transfer (if needed)</div><div class="uc-step-b">If candidate wants to talk to a human — AI transfers call live with full transcript and context shared.</div></div><span class="uc-step-tag">Handoff</span></div>
+              </div>
+              <div class="uc-channels">
+                <span class="uc-ch ch-ai">Voice AI</span>
+                <span class="uc-ch ch-wa">WhatsApp</span>
+                <span class="uc-ch ch-em">Email</span>
+                <span class="uc-ch ch-vc">Human Handoff</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 4: INTERVIEW SCHEDULING -->
+      <div class="uc-panel" id="ucp-4">
+        <div class="uc-panel-inner">
+          <div class="uc-desc-col">
+            <div class="uc-badge"><span class="ldot"></span> Interview Scheduling Agent</div>
+            <h3 class="uc-title">Scheduling without<br><span class="grad">a single email thread.</span></h3>
+            <p class="uc-desc">The Interview Scheduling Agent coordinates availability between candidates and interviewers, books slots, sends confirmations, handles reschedules, and sends reminders — all autonomously via WhatsApp, email, and voice. No coordinator needed.</p>
+            <div class="uc-highlights">
+              <div class="uc-hl"><span class="uc-hl-ico">🗓️</span><div><div class="uc-hl-t">Smart Slot Matching</div><div class="uc-hl-b">AI checks interviewer calendars, candidate availability, and books the optimal slot — no back-and-forth.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">🔔</span><div><div class="uc-hl-t">Multi-Channel Confirmations</div><div class="uc-hl-b">Calendar invites, WhatsApp confirmations, and email reminders sent to all parties automatically.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">↩️</span><div><div class="uc-hl-t">Reschedule & Cancellation Handling</div><div class="uc-hl-b">If a slot changes, AI immediately notifies all parties, proposes alternatives, and re-books without HR involvement.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">⏰</span><div><div class="uc-hl-t">Intelligent Reminder Sequence</div><div class="uc-hl-b">24-hour, 1-hour, and 15-minute reminders sent via WhatsApp + email. No-show rates drop dramatically.</div></div></div>
+            </div>
+            <div class="uc-cta-row">
+              <a href="https://calendly.com/admin-voxket/demo" target="_blank"><button class="btn btn-md btn-glow">See It Live →</button></a>
+            </div>
+          </div>
+          <div class="uc-flow-col">
+            <div class="uc-flow-card">
+              <div class="uc-flow-header">
+                <span class="uc-flow-title">voxket://scheduling-agent/interview</span>
+                <span class="uc-flow-live"><span class="ldot"></span>COORDINATING</span>
+              </div>
+              <div class="uc-steps">
+                <div class="uc-step"><div class="uc-step-num">1</div><div><div class="uc-step-t">Candidate Qualified → Schedule Triggered</div><div class="uc-step-b">AI Scheduling Agent activates immediately after candidate is marked qualified. Availability request sent.</div></div><span class="uc-step-tag">Auto</span></div>
+                <div class="uc-step"><div class="uc-step-num">2</div><div><div class="uc-step-t">Availability Collected via WhatsApp</div><div class="uc-step-b">Candidate selects preferred slots via conversational WhatsApp or email link. No forms, no friction.</div></div><span class="uc-step-tag">AI</span></div>
+                <div class="uc-step"><div class="uc-step-num">3</div><div><div class="uc-step-t">Interviewer Calendar Checked & Booked</div><div class="uc-step-b">AI checks panel availability, books the meeting, creates Google/Outlook calendar events for all parties.</div></div><span class="uc-step-tag">Auto</span></div>
+                <div class="uc-step"><div class="uc-step-num">4</div><div><div class="uc-step-t">Confirmations Sent — All Channels</div><div class="uc-step-b">Candidate gets WhatsApp + email confirmation. Interviewer gets calendar invite + briefing doc link.</div></div><span class="uc-step-tag">Sent</span></div>
+                <div class="uc-step"><div class="uc-step-num">5</div><div><div class="uc-step-t">Reminders + Reschedule Managed</div><div class="uc-step-b">Smart reminder sequence. If slot postponed, AI notifies all, proposes alternatives, re-books instantly.</div></div><span class="uc-step-tag">Done</span></div>
+              </div>
+              <div class="uc-channels">
+                <span class="uc-ch ch-wa">WhatsApp</span>
+                <span class="uc-ch ch-em">Email</span>
+                <span class="uc-ch ch-sl">Calendar</span>
+                <span class="uc-ch ch-ai">Voice Reminder</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 5: AI WORKFLOW ENGINE -->
+      <div class="uc-panel" id="ucp-5">
+        <div class="uc-panel-inner">
+          <div class="uc-desc-col">
+            <div class="uc-badge"><span class="ldot"></span> AI Workflow Engine</div>
+            <h3 class="uc-title">Any HR workflow.<br><span class="grad">Built and deployed in hours.</span></h3>
+            <p class="uc-desc">Beyond the core use cases, Voxket's AI Workflow Engine lets you build any HR automation — background verification, offer approvals, compliance checks, exit interviews, probation reviews — with minimal configuration. Every process, every team, every business.</p>
+            <div class="uc-highlights">
+              <div class="uc-hl"><span class="uc-hl-ico">🧱</span><div><div class="uc-hl-t">No-Code Workflow Builder</div><div class="uc-hl-b">Drag-and-drop flow builder — define triggers, actions, approvals, and channels without writing code.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">🔀</span><div><div class="uc-hl-t">Multi-Step Approval Flows</div><div class="uc-hl-b">Route any HR decision through configurable approval chains — manager, HR, legal — with auto-escalation.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">🤖</span><div><div class="uc-hl-t">AI Agents on Any Process</div><div class="uc-hl-b">Attach a Calling, Chat, or Scheduling Agent to any workflow step — background verifications, probation reviews, exit interviews.</div></div></div>
+              <div class="uc-hl"><span class="uc-hl-ico">🔌</span><div><div class="uc-hl-t">Connect Any System</div><div class="uc-hl-b">REST API, webhooks, and native connectors — plug Voxket into any HRMS, ERP, or internal tool with minimal change.</div></div></div>
+            </div>
+            <div class="uc-cta-row">
+              <a href="https://calendly.com/admin-voxket/demo" target="_blank"><button class="btn btn-md btn-glow">Build Your Workflow →</button></a>
+            </div>
+          </div>
+          <div class="uc-flow-col">
+            <div class="uc-flow-card">
+              <div class="uc-flow-header">
+                <span class="uc-flow-title">voxket://workflow-engine/custom</span>
+                <span class="uc-flow-live"><span class="ldot"></span>CONFIGURABLE</span>
+              </div>
+              <div class="uc-steps">
+                <div class="uc-step"><div class="uc-step-num">1</div><div><div class="uc-step-t">Define Trigger & Scope</div><div class="uc-step-b">Set the trigger — new hire, status change, date event, API call. Define which roles or departments it applies to.</div></div><span class="uc-step-tag">Config</span></div>
+                <div class="uc-step"><div class="uc-step-num">2</div><div><div class="uc-step-t">Build the AI Agent Flow</div><div class="uc-step-b">Assign agents to steps — Calling Agent for BGV confirmation, Chat Agent for compliance questions, Scheduler for reviews.</div></div><span class="uc-step-tag">AI</span></div>
+                <div class="uc-step"><div class="uc-step-num">3</div><div><div class="uc-step-t">Configure Approval Chain</div><div class="uc-step-b">Route decisions through configurable approvers. Auto-escalate if no response within defined SLA.</div></div><span class="uc-step-tag">Smart</span></div>
+                <div class="uc-step"><div class="uc-step-num">4</div><div><div class="uc-step-t">Connect to Your Systems</div><div class="uc-step-b">Push results to HRMS, CRM, Slack, or any system. Single API call or webhook — done in hours.</div></div><span class="uc-step-tag">API</span></div>
+                <div class="uc-step"><div class="uc-step-num">5</div><div><div class="uc-step-t">Deploy, Monitor, Iterate</div><div class="uc-step-b">Live dashboard shows every workflow execution. Modify flows with a config change — no engineering sprint needed.</div></div><span class="uc-step-tag">Live</span></div>
+              </div>
+              <div class="uc-channels">
+                <span class="uc-ch ch-ai">Voice AI</span>
+                <span class="uc-ch ch-wa">WhatsApp</span>
+                <span class="uc-ch ch-em">Email</span>
+                <span class="uc-ch ch-cr">API/CRM</span>
+                <span class="uc-ch ch-sl">Slack</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end uc-panels -->
+  </div>
+</section>
+
+<!-- AUDIO DEMO -->
+<section id="audio">
+  <div class="grid-bg" style="opacity:.5"></div>
+
+  <!-- Hidden real HTML5 audio element — update src path when hosting the file -->
+  <audio id="real-audio" preload="metadata">
+    <source src="voxket-HR-AI.mp3" type="audio/mpeg">
+    <source src="voxket-HR-AI.wav" type="audio/wav">
+    <source src="voxket-HR-AI.ogg" type="audio/ogg">
+  </audio>
+
+  <div class="wrap">
+    <div class="audio-grid">
+
+      <!-- LEFT: copy -->
+      <div>
+        <div class="sec-label">Hear It Work · Real AI Call</div>
+        <h2 class="h2 reveal">This is a <span class="grad">real AI-to-candidate call.</span></h2>
+        <p class="sm muted reveal" style="margin-top:.875rem;max-width:430px;line-height:1.78">
+          Press play and listen. This is Voxket's Calling Agent in a live HR screening call with a candidate — completely autonomous, no human HR involved. This is what replacing manual HR sounds like.
+        </p>
+        <div class="audio-feats">
+          <div class="af reveal"><span class="af-ico">🎙️</span>Real call — natural, human-like AI voice</div>
+          <div class="af reveal"><span class="af-ico">⚡</span>Live qualification happening during conversation</div>
+          <div class="af reveal"><span class="af-ico">🔄</span>CRM updated automatically after the call ends</div>
+          <div class="af reveal"><span class="af-ico">🌐</span>Multilingual — English, Hindi &amp; 10+ languages</div>
+        </div>
+        <!-- Floating "Now Playing" badge that shows when audio plays -->
+        <div class="now-playing-badge" id="npbadge" style="display:none">
+          <div class="np-eq"><span></span><span></span><span></span><span></span></div>
+          <span class="np-text">Now Playing · Voxket AI Call</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Premium Player Card -->
+      <div class="player reveal" id="player-card">
+
+        <!-- Top bar -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.375rem">
+          <div>
+            <div class="pl-title">AI HR Screening Call</div>
+            <div class="pl-meta" id="pl-meta-label">Voxket Calling Agent ↔ Candidate · Loading...</div>
+          </div>
+          <div class="pl-live-tag" id="pl-live-tag">
+            <span class="ldot" style="width:5px;height:5px"></span> REAL CALL
+          </div>
+        </div>
+
+        <!-- Speakers -->
+        <div class="speaker-row">
+          <div class="speaker-chip speaker-ai">
+            <div class="sp-av sp-ai-av">🤖</div>
+            <div>
+              <div class="sp-name">Voxket AI Agent</div>
+              <div class="sp-role">HR Calling Agent</div>
+            </div>
+            <div class="sp-wav" id="sp-wav-ai">
+              <div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div><div class="wb"></div>
+            </div>
+          </div>
+          <div class="speaker-divider">↔</div>
+          <div class="speaker-chip speaker-cand">
+            <div class="sp-av sp-cand-av">👤</div>
+            <div>
+              <div class="sp-name">Candidate</div>
+              <div class="sp-role">Job Seeker</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EQ Visualiser -->
+        <div class="eq" id="peq" style="margin-bottom:1.125rem">
+          <div class="eq-b"></div><div class="eq-b"></div><div class="eq-b"></div>
+          <div class="eq-b"></div><div class="eq-b"></div><div class="eq-b"></div>
+          <div class="eq-b"></div><div class="eq-b"></div><div class="eq-b"></div>
+          <div class="eq-b"></div><div class="eq-b"></div><div class="eq-b"></div>
+          <div class="eq-b"></div><div class="eq-b"></div><div class="eq-b"></div>
+          <div class="eq-b"></div>
+        </div>
+
+        <!-- Seekable waveform progress bar -->
+        <div class="wf-wrap" id="pwf" onclick="seekAudio(event)" title="Click to seek">
+          <div class="wf-bars" id="pwfb"></div>
+          <div class="wf-overlay" id="pov" style="width:0%"></div>
+          <!-- playhead -->
+          <div class="wf-playhead" id="wf-playhead" style="left:0%"></div>
+        </div>
+
+        <!-- Time row -->
+        <div class="pl-time">
+          <span id="pct">0:00</span>
+          <span id="pdur">--:--</span>
+        </div>
+
+        <!-- Controls -->
+        <div class="pl-ctrls">
+          <button class="pl-skip" onclick="skipA(-10)" title="Back 10s">⟨ 10s</button>
+          <button class="pl-play" id="ppbtn" onclick="toggleA()" title="Play / Pause">▶</button>
+          <button class="pl-skip" onclick="skipA(10)" title="Forward 10s">10s ⟩</button>
+          <div class="vol-wrap">
+            <span style="font-size:.75rem">🔊</span>
+            <input type="range" class="vol-slider" id="vol-slider" min="0" max="1" step="0.05" value="1" oninput="setVol(this.value)">
+          </div>
+        </div>
+
+        <!-- CTA bottom -->
+        <div style="margin-top:1.375rem;padding-top:1.125rem;border-top:1px solid rgba(79,70,229,.1)">
+          <a href="https://calendly.com/admin-voxket/demo" target="_blank" style="display:block">
+            <button class="btn btn-md btn-solid" style="width:100%;justify-content:center">
+              🚀 Deploy This AI Caller for Your Company
+            </button>
+          </a>
+        </div>
+
+      </div><!-- end player card -->
+    </div>
+  </div>
+</section>
+
+<!-- WORKFLOW -->
+<section id="workflow">
+  <div class="wrap-sm">
+    <div class="sec-label">See It Work</div>
+    <h2 class="h2 reveal">From first call to <span class="grad">Day 1 — automated.</span></h2>
+    <p class="sm muted reveal" style="margin-top:.75rem">A complete hiring cycle, zero human touchpoints.</p>
+    <div class="tl">
+      <div class="tl-step"><div class="tl-dot"></div><div class="tl-card"><span class="tl-n">01</span><div><div class="tl-t">AI Places Voice Call to Candidate</div><p class="tl-b">The Calling Agent dials the candidate and conducts a structured screening using natural voice AI — zero human involvement.</p></div><span class="tl-badge">✓ Auto</span></div></div>
+      <div class="tl-step"><div class="tl-dot"></div><div class="tl-card"><span class="tl-n">02</span><div><div class="tl-t">Candidate Qualified in Real-Time</div><p class="tl-b">AI evaluates responses against role criteria instantly. Qualified candidates are flagged and moved forward automatically.</p></div><span class="tl-badge">✓ Live</span></div></div>
+      <div class="tl-step"><div class="tl-dot"></div><div class="tl-card"><span class="tl-n">03</span><div><div class="tl-t">CRM Updated Instantly</div><p class="tl-b">Call outcome, transcript, and qualification status sync to your ATS/CRM — no manual data entry, ever.</p></div><span class="tl-badge">✓ Synced</span></div></div>
+      <div class="tl-step"><div class="tl-dot"></div><div class="tl-card"><span class="tl-n">04</span><div><div class="tl-t">Interview Scheduled Autonomously</div><p class="tl-b">The Scheduling Agent matches availability, books the slot, and sends confirmations to all parties — no coordinator needed.</p></div><span class="tl-badge">✓ Booked</span></div></div>
+      <div class="tl-step"><div class="tl-dot"></div><div class="tl-card"><span class="tl-n">05</span><div><div class="tl-t">Onboarding Docs Collected &amp; Verified</div><p class="tl-b">Onboarding Agent sends requests, chases outstanding items, and verifies completeness — fully autonomous.</p></div><span class="tl-badge">✓ Done</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dash">
+  <div class="wrap">
+    <div class="sec-label">Live System</div>
+    <h2 class="h2 reveal">Your AI workforce, <span class="grad">fully visible.</span></h2>
+    <p class="sm muted reveal" style="margin-top:.75rem">Every AI action, candidate status, and metric — in real time.</p>
+    <div class="dash reveal">
+      <div class="dash-top"><div class="osx" style="background:#ef4444"></div><div class="osx" style="background:#f59e0b"></div><div class="osx" style="background:#22c55e"></div><div class="dash-title">Voxket HR · Dashboard · Live</div></div>
+      <div class="dash-body">
+        <div class="dash-sb">
+          <div class="sb-lbl">Workspace</div>
+          <div class="dn act">📊 Pipeline</div>
+          <div class="dn">📞 AI Calls</div>
+          <div class="dn">📅 Schedule</div>
+          <div class="dn">📋 Onboarding</div>
+          <div class="dn">📈 Analytics</div>
+          <div class="dn">⚙️ Agents</div>
+        </div>
+        <div class="dash-main">
+          <div class="kpi-row">
+            <div class="kpi"><div class="kpi-l">Active Candidates</div><div class="kpi-v">128</div><div class="kpi-d">↑ 14 today</div></div>
+            <div class="kpi"><div class="kpi-l">AI Calls Made</div><div class="kpi-v">342</div><div class="kpi-d">↑ 28 today</div></div>
+            <div class="kpi"><div class="kpi-l">Interviews Booked</div><div class="kpi-v">47</div><div class="kpi-d">↑ 6 today</div></div>
+            <div class="kpi"><div class="kpi-l">Onboarding %</div><div class="kpi-v">91%</div><div class="kpi-d">↑ 3% this week</div></div>
+          </div>
+          <div class="pipe-lbl">Candidate Pipeline · AI-Managed</div>
+          <div class="prow"><span class="prow-n">Priya Mehta</span><span class="prow-s">Screening ✓</span><div class="pb"><div class="pbf" style="width:85%"></div></div><span class="ok">On Track</span></div>
+          <div class="prow"><span class="prow-n">Arjun Patel</span><span class="prow-s">Interview Booked ✓</span><div class="pb"><div class="pbf" style="width:70%"></div></div><span class="ok">Active</span></div>
+          <div class="prow"><span class="prow-n">Sarah Kim</span><span class="prow-s">Docs Pending ⚠</span><div class="pb"><div class="pbf" style="width:55%"></div></div><span class="warn">Pending Doc</span></div>
+          <div class="prow"><span class="prow-n">Marcus Johnson</span><span class="prow-s">Onboarding ✓</span><div class="pb"><div class="pbf" style="width:95%"></div></div><span class="ok">Complete</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section id="compare">
+  <div class="wrap-sm" style="text-align:center">
+    <div class="sec-label" style="justify-content:center">Differentiation</div>
+    <h2 class="h2 reveal">Why <span class="grad">Voxket HR</span> wins.</h2>
+    <p class="sm muted reveal" style="max-width:460px;margin:.75rem auto 0">No comparable product exists. This is a new category.</p>
+    <div class="cmp reveal">
+      <div class="cmp-h"><div class="cmp-th">Feature</div><div class="cmp-th v">⚡ Voxket HR</div><div class="cmp-th">Traditional Tools</div></div>
+      <div class="cmp-r"><div class="cmp-td feat">Voice AI Execution</div><div class="cmp-td v"><span class="yes">✓</span></div><div class="cmp-td"><span class="no">✗</span></div></div>
+      <div class="cmp-r"><div class="cmp-td feat">Auto Candidate Follow-ups</div><div class="cmp-td v"><span class="yes">✓</span></div><div class="cmp-td"><span class="no">✗</span></div></div>
+      <div class="cmp-r"><div class="cmp-td feat">Autonomous Scheduling</div><div class="cmp-td v"><span class="yes">✓</span></div><div class="cmp-td"><span class="no">✗</span></div></div>
+      <div class="cmp-r"><div class="cmp-td feat">Real Work Gets Done</div><div class="cmp-td v"><span class="yes">✓</span></div><div class="cmp-td"><span class="no">✗</span></div></div>
+      <div class="cmp-r"><div class="cmp-td feat">Manual HR Effort Required</div><div class="cmp-td v"><span class="no">✗</span></div><div class="cmp-td"><span class="yes">✓</span></div></div>
+      <div class="cmp-r"><div class="cmp-td feat">24/7 AI Operations</div><div class="cmp-td v"><span class="yes">✓</span></div><div class="cmp-td"><span class="no">✗</span></div></div>
+      <div class="cmp-r"><div class="cmp-td feat">Onboarding Automation</div><div class="cmp-td v"><span class="yes">✓</span></div><div class="cmp-td"><span class="no">✗</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section id="metrics">
+  <div class="wrap" style="text-align:center">
+    <div class="sec-label" style="justify-content:center">Impact</div>
+    <h2 class="h2 reveal">Numbers that <span class="grad">speak louder.</span></h2>
+    <div class="met-grid">
+      <div class="card met-card reveal"><div class="met-n" data-target="70" data-suf="%↓">0%</div><div class="met-l">Manual HR Work</div><p class="met-s">Eliminated through autonomous AI execution across the hiring funnel</p></div>
+      <div class="card met-card reveal"><div class="met-n" data-target="2" data-suf="×">0×</div><div class="met-l">Faster Hiring</div><p class="met-s">From job description to offer letter, at twice the speed</p></div>
+      <div class="card met-card reveal"><div class="met-n" data-target="90" data-suf="%">0%</div><div class="met-l">Onboarding Completion</div><p class="met-s">Industry average without automation sits at just 52%</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- USERS -->
+<section id="users">
+  <div class="wrap">
+    <div class="sec-label">Who It's For</div>
+    <h2 class="h2 reveal">Built for <span class="grad">teams that move fast.</span></h2>
+    <div class="usr-grid">
+      <div class="card usr-card reveal"><div class="usr-ico">🎯</div><div class="usr-t">Recruitment Firms</div><div class="usr-tag">Close more roles, faster.</div><p class="usr-b">Scale candidate outreach and screening without scaling headcount. Handle 10× the volume with the same team.</p></div>
+      <div class="card usr-card reveal"><div class="usr-ico">🏢</div><div class="usr-t">Mid-size Companies</div><div class="usr-tag">Reduce HR operational load.</div><p class="usr-b">Free your HR partners from execution overhead. Let them focus on culture, compensation, and strategy instead.</p></div>
+      <div class="card usr-card reveal"><div class="usr-ico">🌐</div><div class="usr-t">Enterprises</div><div class="usr-tag">Scale hiring operations globally.</div><p class="usr-b">Deploy AI agents across regions, roles, and languages. Standardise the hiring experience at massive scale.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section id="ints">
+  <div class="wrap" style="text-align:center">
+    <div class="sec-label" style="justify-content:center">Integrations</div>
+    <h2 class="h2 reveal">Plugs into your <span class="grad">existing stack.</span></h2>
+    <p class="sm muted reveal" style="max-width:460px;margin:.75rem auto 0">No rip-and-replace. Connects to the tools you already use — and makes them intelligent.</p>
+    <div class="int-wrap">
+      <div class="int-c reveal"><div class="int-ico" style="background:rgba(0,161,228,.12)">☁️</div><div><div class="int-n">Salesforce</div><div class="int-s">CRM sync</div></div></div>
+      <div class="int-c reveal"><div class="int-ico" style="background:rgba(37,211,102,.12)">💬</div><div><div class="int-n">WhatsApp</div><div class="int-s">Candidate comms</div></div></div>
+      <div class="int-c reveal"><div class="int-ico" style="background:rgba(234,67,53,.12)">📧</div><div><div class="int-n">Email / SMTP</div><div class="int-s">Auto follow-ups</div></div></div>
+      <div class="int-c reveal"><div class="int-ico" style="background:rgba(79,70,229,.15)">🗂️</div><div><div class="int-n">ATS Systems</div><div class="int-s">Pipeline data</div></div></div>
+      <div class="int-c reveal"><div class="int-ico" style="background:rgba(255,166,0,.1)">📱</div><div><div class="int-n">Slack</div><div class="int-s">Team alerts</div></div></div>
+      <div class="int-c reveal"><div class="int-ico" style="background:rgba(6,182,212,.12)">🔗</div><div><div class="int-n">REST API</div><div class="int-s">Custom integrations</div></div></div>
+    </div>
+    <div class="flow">Data flows seamlessly<span class="fdots"><span class="fd"></span><span class="fd"></span><span class="fd"></span></span>between every connected system in real-time</div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section id="trust">
+  <div class="wrap">
+    <div class="sec-label">Enterprise Trust</div>
+    <h2 class="h2 reveal">Built for <span class="grad">enterprise grade.</span></h2>
+    <div class="tr-grid">
+      <div class="card tr-card reveal"><span class="tr-ico">🛡️</span><div class="tr-t">Secure by Default</div><p class="tr-b">End-to-end encryption, SOC2-aligned infrastructure, and zero-trust access model.</p></div>
+      <div class="card tr-card reveal"><span class="tr-ico">🔌</span><div class="tr-t">API-First</div><p class="tr-b">Full programmatic access. Build custom automations on top of Voxket's intelligence layer.</p></div>
+      <div class="card tr-card reveal"><span class="tr-ico">⚡</span><div class="tr-t">Infinitely Scalable</div><p class="tr-b">From 10 hires to 10,000. Infrastructure that scales with your ambition, not against it.</p></div>
+      <div class="card tr-card reveal"><span class="tr-ico">✅</span><div class="tr-t">Compliance Ready</div><p class="tr-b">Built with GDPR, DPDP, and global data privacy regulations in mind from day one.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="orb o1"></div><div class="orb o2"></div>
+  <div class="grid-bg" style="opacity:.28"></div>
+  <div class="cta-in">
+    <div class="sec-label" style="justify-content:center">Deploy in Days. Not Months.</div>
+    <h2 class="h2 reveal">Deploy Your <span class="grad">AI HR Workforce</span> in Days</h2>
+    <p class="cta-sub reveal">Stop letting manual HR slow your company down. Your AI workforce is ready to deploy — today.</p>
+    <div class="cta-btns reveal">
+      <a href="https://calendly.com/admin-voxket/demo" target="_blank"><button class="btn btn-lg btn-glow">📅 Book a Demo</button></a>
+      <a href="https://calendly.com/admin-voxket/demo" target="_blank"><button class="btn btn-lg btn-ghost">🚀 Start a Pilot</button></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div><div class="foot-logo">Voxket HR AI Suite</div><p class="xs muted" style="margin-top:.3rem">A vertical product by Voxket · The Frontline AI Workforce Platform</p></div>
+  <p class="xs muted">© 2025 Voxket. All rights reserved.</p>
+</footer>
+
+<!-- CHATBOT WIDGET -->
+<div id="cwid">
+  <div class="cwin" id="cwin">
+    <div class="cwh">
+      <div class="cwav">🤖</div>
+      <div><div class="cwn">Voxket HR AI</div><div class="cws">● Online · Ask me anything</div></div>
+      <button class="cwx" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="cwb" id="cwb">
+      <div class="msg bot">Hi! I'm Voxket HR's AI assistant. Ask me anything about our platform, AI agents, pricing, or how we can transform your hiring. 👋</div>
+    </div>
+    <div class="cwsugs" id="cwsugs">
+      <button class="csug" onclick="sendSug(this)">What is Voxket HR?</button>
+      <button class="csug" onclick="sendSug(this)">How does AI calling work?</button>
+      <button class="csug" onclick="sendSug(this)">Pricing?</button>
+      <button class="csug" onclick="sendSug(this)">Integrations?</button>
+    </div>
+    <div class="cwf">
+      <input class="cwinp" id="cwinp" placeholder="Ask about Voxket HR…" onkeydown="if(event.key==='Enter')sendMsg()">
+      <button class="cwsnd" onclick="sendMsg()">➤</button>
+    </div>
+  </div>
+  <button class="cfab" onclick="toggleChat()">🤖</button>
+</div>
+
+<script>
+/* ── use cases tab switcher ── */
+function switchTab(idx){
+  document.querySelectorAll('.uc-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  document.querySelectorAll('.uc-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+}
+function gotoUC(idx){
+  switchTab(idx);
+  document.getElementById('usecases').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ── hero ticker auto-cycle ── */
+let tickerIdx=0;
+const tickerPills=document.querySelectorAll('.ticker-pill');
+setInterval(()=>{
+  tickerPills.forEach(p=>p.classList.remove('active'));
+  tickerIdx=(tickerIdx+1)%tickerPills.length;
+  tickerPills[tickerIdx].classList.add('active');
+},2200);
+
+/* ── back to top ── */
+const bttBtn=document.getElementById('btt-btn');
+window.addEventListener('scroll',()=>{
+  // progress bar
+  document.getElementById('prog').style.width=
+    (window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';
+  // back to top visibility — show after 400px
+  bttBtn.classList.toggle('visible', window.scrollY > 400);
+});
+
+/* ── nav dropdown: click toggle ── */
+const navDD=document.getElementById('nav-dd');
+function toggleDD(e){
+  e.stopPropagation();
+  navDD.classList.toggle('open');
+}
+// close on outside click
+document.addEventListener('click',e=>{
+  if(!navDD.contains(e.target)) navDD.classList.remove('open');
+});
+// close on Escape
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') navDD.classList.remove('open'); });
+
+/* ── navigate to use case from dropdown ── */
+function navToUC(idx){
+  navDD.classList.remove('open');
+  switchTab(idx);
+  setTimeout(()=>document.getElementById('usecases').scrollIntoView({behavior:'smooth',block:'start'}),60);
+}
+function goto(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+
+/* ── scroll reveal ── */
+const rObs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{ if(e.isIntersecting) setTimeout(()=>e.target.classList.add('up'),i*65); });
+},{threshold:.1});
+document.querySelectorAll('.reveal,.tl-step').forEach(el=>rObs.observe(el));
+
+/* ── counters ── */
+function animCnt(el){
+  const t=parseInt(el.dataset.target),sf=el.dataset.suf||'';
+  let s=null;
+  (function step(ts){
+    if(!s)s=ts;
+    const p=Math.min((ts-s)/1800,1),e=1-Math.pow(1-p,3);
+    el.textContent=Math.floor(e*t)+sf;
+    if(p<1)requestAnimationFrame(step);
+  })(performance.now());
+}
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting&&!e.target.dataset.done){e.target.dataset.done=1;animCnt(e.target);}});
+},{threshold:.5});
+document.querySelectorAll('[data-target]').forEach(el=>cObs.observe(el));
+
+/* ── hero transcript sim ── */
+const txls=[
+  {t:'ai', s:"Hi Rahul! Calling from Voxket HR for the Sr. Engineer role. Good time?"},
+  {t:'c',  s:"Yes, absolutely. I was expecting your call."},
+  {t:'ai', s:"Great — open to a Bengaluru-based position?"},
+  {t:'c',  s:"Yes, I'm in Pune but open to relocating for the right role."},
+  {t:'ai', s:"5+ years in distributed systems — comfortable leading microservices?"},
+  {t:'c',  s:"Yes, led a migration at my current company — happy to share details."},
+  {t:'ai', s:"Excellent — you're qualified. Checking interview slots…"},
+];
+let ti=0;
+const txBox=document.getElementById('txbox');
+function addTx(){
+  if(ti>=txls.length){ti=0;txBox.innerHTML='';setTimeout(addTx,2200);return;}
+  const l=txls[ti];
+  const d=document.createElement('div');
+  d.className='tx tx-'+l.t;
+  d.textContent=(l.t==='ai'?'🤖 AI: ':'👤 Rahul: ')+l.s;
+  txBox.appendChild(d);
+  if(txBox.children.length>4)txBox.removeChild(txBox.children[0]);
+  const cq=document.getElementById('cq'),cs=document.getElementById('cs'),co=document.getElementById('co');
+  if(ti===0){cq.classList.add('chip-on');cs.classList.remove('chip-on');co.classList.remove('chip-on')}
+  if(ti===4){cq.classList.remove('chip-on');cs.classList.add('chip-on')}
+  if(ti===6){cs.classList.remove('chip-on');co.classList.add('chip-on')}
+  ti++;
+  setTimeout(addTx,2300+Math.random()*500);
+}
+addTx();
+
+/* ══════════════════════════════════════
+   REAL AUDIO PLAYER — HTML5 Audio API
+   File: voxket-HR-AI.mp3 (same folder)
+════════════════════════════════════════ */
+const audio = document.getElementById('real-audio');
+const playBtn = document.getElementById('ppbtn');
+const eqEl = document.getElementById('peq');
+const povEl = document.getElementById('pov');
+const pctEl = document.getElementById('pct');
+const pdurEl = document.getElementById('pdur');
+const playheadEl = document.getElementById('wf-playhead');
+const npBadge = document.getElementById('npbadge');
+const spWavAI = document.getElementById('sp-wav-ai');
+const metaLabel = document.getElementById('pl-meta-label');
+
+// Build waveform bars
+const wfbEl = document.getElementById('pwfb');
+const wfHeights=[55,80,45,90,60,75,50,95,65,70,42,88,55,72,48,85,58,78,44,92,62,68,38,82,52,76,58,84,60,78];
+wfHeights.forEach(h=>{
+  const b=document.createElement('div');
+  b.className='wf-b'; b.style.height=h+'%'; wfbEl.appendChild(b);
+});
+
+function fmt(s){
+  if(isNaN(s)||s===Infinity)return '--:--';
+  const m=Math.floor(s/60);
+  return m+':'+(Math.floor(s%60)<10?'0':'')+Math.floor(s%60);
+}
+
+function updateProgress(){
+  if(!audio.duration)return;
+  const pct=(audio.currentTime/audio.duration)*100;
+  povEl.style.width=pct+'%';
+  playheadEl.style.left=pct+'%';
+  pctEl.textContent=fmt(audio.currentTime);
+  // colour waveform bars
+  const bars=wfbEl.querySelectorAll('.wf-b');
+  bars.forEach((b,i)=>b.classList.toggle('done', i/bars.length < pct/100));
+}
+
+// When metadata loads — get real duration
+audio.addEventListener('loadedmetadata',()=>{
+  pdurEl.textContent=fmt(audio.duration);
+  metaLabel.textContent='Voxket Calling Agent ↔ Candidate · '+fmt(audio.duration);
+});
+
+// Progress tick
+audio.addEventListener('timeupdate', updateProgress);
+
+// On end
+audio.addEventListener('ended',()=>{
+  playBtn.textContent='▶';
+  eqEl.classList.remove('on');
+  spWavAI.classList.remove('active');
+  npBadge.style.display='none';
+  playBtn.style.background='linear-gradient(135deg,var(--indigo),var(--blue))';
+});
+
+// Handle load error — show fallback message
+audio.addEventListener('error',()=>{
+  metaLabel.textContent='⚠ Place voxket-HR-AI.mp3 in the same folder as this HTML file';
+  metaLabel.style.color='#f87171';
+});
+
+function toggleA(){
+  if(audio.paused){
+    audio.play().then(()=>{
+      playBtn.textContent='⏸';
+      eqEl.classList.add('on');
+      spWavAI.classList.add('active');
+      npBadge.style.display='inline-flex';
+    }).catch(()=>{
+      metaLabel.textContent='⚠ Audio file not found — place voxket-HR-AI.mp3 in same folder';
+      metaLabel.style.color='#f87171';
+    });
+  } else {
+    audio.pause();
+    playBtn.textContent='▶';
+    eqEl.classList.remove('on');
+    spWavAI.classList.remove('active');
+    npBadge.style.display='none';
+  }
+}
+
+function skipA(s){
+  audio.currentTime=Math.max(0,Math.min(audio.duration||0, audio.currentTime+s));
+  updateProgress();
+}
+
+function seekAudio(e){
+  if(!audio.duration)return;
+  const rect=document.getElementById('pwf').getBoundingClientRect();
+  audio.currentTime=((e.clientX-rect.left)/rect.width)*audio.duration;
+  updateProgress();
+}
+
+function setVol(v){
+  audio.volume=parseFloat(v);
+}
+/* ══ END REAL AUDIO PLAYER ══ */
+
+/* ── chatbot knowledge base ── */
+const KB={
+  "what is voxket hr":"Voxket HR AI Suite is the first Voice-First AI Workforce for HR. Instead of dashboards, we deploy specialised AI agents that actually execute HR tasks — calling candidates, scheduling interviews, collecting onboarding docs — completely autonomously, 24/7.",
+  "what does voxket hr do":"Voxket HR deploys AI agents that: (1) Call and screen candidates using natural voice AI, (2) Auto-schedule interviews, (3) Send follow-ups and handle ghosted candidates, (4) Collect and verify onboarding documents — all without human intervention.",
+  "how does ai calling work":"Our Calling Agent uses advanced voice AI to dial candidates, conduct structured screening conversations, qualify them in real time, and update your CRM automatically. Calls happen 24/7 and scale infinitely.",
+  "pricing":"Pricing is customised based on hiring volume and agent usage. Book a demo at calendly.com/admin-voxket/demo and our team will share a tailored proposal.",
+  "cost":"Pricing is based on your hiring volume and agents deployed. We offer Startup, Growth, and Enterprise plans. Book a demo for an exact quote.",
+  "integrations":"Voxket HR integrates with Salesforce, WhatsApp, Email/SMTP, major ATS systems (Lever, Greenhouse, Workday), Slack, and any system via REST API.",
+  "which integrations":"Salesforce, WhatsApp, Email, major ATS platforms, Slack, and REST API for custom integrations.",
+  "agents":"There are 4 core AI agents: (1) Calling Agent — voice screening, (2) Scheduling Agent — interview booking, (3) Onboarding Agent — doc collection, (4) HR Buddy — 24/7 candidate chat support.",
+  "how long to deploy":"Most teams go live within 3–7 days. We handle onboarding, integration setup, and agent training.",
+  "secure":"Yes — end-to-end encryption, SOC2-aligned infrastructure, zero-trust access, GDPR and India's DPDP Act compliant.",
+  "who is it for":"Built for: Recruitment firms wanting to close more roles faster, Mid-size companies reducing HR load, and Enterprises scaling hiring globally.",
+  "different from other hr software":"Unlike traditional HR tools that show dashboards, Voxket HR actually executes the work. AI agents make calls, send emails, book slots, and collect documents autonomously.",
+  "hindi":"Yes! Our Calling Agent supports English, Hindi, and multiple languages — ideal for India-based hiring at scale.",
+  "onboarding agent":"The AI Onboarding Agent handles the entire post-offer process: collects personal & professional details, requests and verifies documents (PAN, Aadhaar, degrees, bank details), evaluates correctness, triggers email/WhatsApp/voice chase for missing items, and syncs everything to your CRM/HRMS — no HR involvement needed.",
+  "ai buddy":"AI Buddy is an always-on companion for new joiners. It answers HR questions 24/7 (leave, payroll, policies), guides the onboarding journey day-by-day, helps with tool setup, runs 30-60-90 day check-ins, and flags disengagement early. Available via WhatsApp, chat, and email.",
+  "recruitment":"Voxket's End-to-End Recruitment AI Workforce covers the full hiring cycle: AI sources candidates, sends personalised outreach, calls and screens them, qualifies against role criteria, schedules interviews, and dispatches offer letters — all autonomously.",
+  "hr calling":"The HR Calling Agent proactively calls candidates to check job-change intent. It analyses warm vs cold leads, qualifies by tech stack and role fit, sends tailored post-call emails and WhatsApp messages, and seamlessly transfers warm candidates to a human recruiter.",
+  "scheduling":"The Interview Scheduling Agent coordinates candidate and interviewer availability, books slots, sends multi-channel confirmations (WhatsApp + email + calendar), manages reschedules, and sends smart reminder sequences — no coordinator needed.",
+  "workflow":"The AI Workflow Engine lets you build any custom HR automation — background verification, offer approvals, compliance checks, exit interviews, probation reviews — with a no-code builder, configurable approval chains, and API connectivity to any system.",
+  "demo":"Absolutely! Book a live demo at calendly.com/admin-voxket/demo — our team will walk you through the full platform and agents in action.",
+};
+function getBotReply(m){
+  const l=m.toLowerCase();
+  for(const[k,v] of Object.entries(KB)){
+    if(l.includes(k)||k.split(' ').every(w=>l.includes(w)))return v;
+  }
+  if(l.includes('call')||l.includes('voice'))return KB["how does ai calling work"];
+  if(l.includes('price')||l.includes('cost')||l.includes('plan'))return KB["cost"];
+  if(l.includes('integrat'))return KB["integrations"];
+  if(l.includes('agent'))return KB["agents"];
+  if(l.includes('secur')||l.includes('gdpr')||l.includes('complian'))return KB["secure"];
+  if(l.includes('deploy')||l.includes('setup')||l.includes('long'))return KB["how long to deploy"];
+  if(l.includes('demo')||l.includes('try')||l.includes('book'))return KB["demo"];
+  if(l.includes('differ')||l.includes('compare')||l.includes(' vs '))return KB["different from other hr software"];
+  if(l.includes('hindi')||l.includes('language'))return KB["hindi"];
+  return "Great question! That's a bit outside what I can answer here. I'd recommend booking a demo — our team will give you a personalised walkthrough. 👉 calendly.com/admin-voxket/demo";
+}
+
+let chatOpen=false;
+function toggleChat(){chatOpen=!chatOpen;document.getElementById('cwin').classList.toggle('open',chatOpen)}
+function appendMsg(text,cls){
+  const body=document.getElementById('cwb');
+  const d=document.createElement('div');
+  d.className='msg '+cls;d.textContent=text;
+  body.appendChild(d);body.scrollTop=body.scrollHeight;
+}
+function showTyping(){
+  const body=document.getElementById('cwb');
+  const d=document.createElement('div');
+  d.className='typing';d.id='tind';
+  d.innerHTML='<span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>';
+  body.appendChild(d);body.scrollTop=body.scrollHeight;
+}
+function hideTyping(){const t=document.getElementById('tind');if(t)t.remove()}
+function sendMsg(){
+  const inp=document.getElementById('cwinp');
+  const txt=inp.value.trim();if(!txt)return;
+  document.getElementById('cwsugs').style.display='none';
+  appendMsg(txt,'usr-m');inp.value='';
+  showTyping();
+  setTimeout(()=>{hideTyping();appendMsg(getBotReply(txt),'bot');},850+Math.random()*550);
+}
+function sendSug(btn){
+  document.getElementById('cwinp').value=btn.textContent;
+  document.getElementById('cwsugs').style.display='none';
+  sendMsg();
+}
+</script>
+</body>
+</html>
